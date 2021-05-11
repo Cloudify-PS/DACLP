@@ -1,0 +1,32 @@
+---
+- name: create certs directory
+  file:
+    path: "/etc/nginx/certs"
+    state: directory
+    owner: www-data
+    group: www-data
+    mode: 0775
+
+- name: install python-cryptography
+  apt:
+    name: [ 'python-cryptography' ]
+    state: latest
+
+- name: create key pair for the server
+  openssl_privatekey:
+    path: "/etc/nginx/certs/server.rsa"
+    size: 2048
+
+- name: create certificate signing request
+  openssl_csr:
+    common_name: "localhost"
+    organization_name: "Client Certificate Demo"
+    path: "/etc/nginx/certs/server.csr"
+    privatekey_path: "/etc/nginx/certs/server.rsa"
+
+- name: create self-signed certificate
+  openssl_certificate:
+    csr_path: "/etc/nginx/certs/server.csr"
+    path: "/etc/nginx/certs/server.crt"
+    provider: selfsigned
+    privatekey_path: "/etc/nginx/certs/server.rsa"

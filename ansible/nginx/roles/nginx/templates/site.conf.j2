@@ -1,0 +1,12 @@
+server {
+  listen 80;
+  listen [::]:80;
+  listen               443 ssl;
+  ssl_certificate      /etc/nginx/certs/server.crt;
+  ssl_certificate_key  /etc/nginx/certs/server.rsa;
+  server_name {{ domain }};
+  root /var/www/{{ domain }};
+  location / {
+    try_files $uri $uri/ =404;
+  }
+}
