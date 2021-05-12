@@ -222,7 +222,7 @@ node_templates:
       - type: cloudify.azure.relationships.contained_in_resource_group
         target: resource_group
 
-  ansible_playbook:
+  run_nginx:
     type: cloudify.nodes.ansible.Playbook
     properties:
       playbook_path: { get_input: ansible_site_yaml_relative_path }
@@ -245,6 +245,17 @@ node_templates:
                 options_config:
                   extra_vars:
                     domain: cfy-hello
+
+  check_nginx:
+    type: cloudify.nodes.Root
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        start: scripts/check_nginx.sh
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: run_nginx
+      - type: cloudify.relationships.contained_in
+        target: webserver_vm
 
 
 capabilities:
