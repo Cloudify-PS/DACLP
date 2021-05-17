@@ -1,0 +1,21 @@
+{
+   "operation":"cloudify.interfaces.lifecycle.create",
+   "operation_kwargs":{
+      "args":{
+         "hardwareProfile":{
+            "vmSize":"Standard_A2_v2"
+         }
+      }
+   },
+   "allow_kwargs_override":true,
+   "run_by_dependency_order":false,
+   "type_names":[
+
+   ],
+   "node_ids":[
+      "webserver_vm"
+   ],
+   "node_instance_ids":[
+
+   ]
+}
