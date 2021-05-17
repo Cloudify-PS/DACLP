@@ -1,0 +1,9 @@
+---
+- hosts: webservers
+  become: yes
+  roles:
+    - nodejs
+    - nodejs-self-signed
+  vars:
+    - homeDir: "{{homeDir}}"
+    - appDir : app

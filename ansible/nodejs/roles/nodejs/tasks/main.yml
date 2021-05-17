@@ -1,0 +1,35 @@
+---
+- name: apt update
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: install packages
+  apt:
+    name:
+      - build-essential
+      - npm
+      - nodejs
+    update_cache: yes
+    state: latest
+
+- name: install pm2
+  npm: name=pm2 global=yes production=yes
+
+- name: create app directory
+  file: path={{homeDir}}/{{appDir}} state=directory
+
+- name: sync website
+  synchronize:
+    src: "{{appDir}}"
+    dest: "{{homeDir}}"
+    archive: no
+    checksum: yes
+    recursive: yes
+    delete: yes
+  notify: "reload pm2"
+
+- name: run npm install
+  npm: path={{homeDir}}/{{appDir}}
+  notify: "reload pm2"
+

@@ -1,0 +1,26 @@
+---
+- name: install python-cryptography
+  apt:
+    name: [ 'python-cryptography' ]
+    state: latest
+
+- name: create key pair for the server
+  openssl_privatekey:
+    path: "{{homeDir}}/{{appDir}}/server.rsa"
+    size: 2048
+  notify: "reload pm2"
+
+- name: create certificate signing request
+  openssl_csr:
+    common_name: "localhost"
+    organization_name: "Client Certificate Demo"
+    path: "{{homeDir}}/{{appDir}}/server.csr"
+    privatekey_path: "{{homeDir}}/{{appDir}}/server.rsa"
+
+- name: create self-signed certificate
+  openssl_certificate:
+    csr_path: "{{homeDir}}/{{appDir}}/server.csr"
+    path: "{{homeDir}}/{{appDir}}/server.crt"
+    provider: selfsigned
+    privatekey_path: "{{homeDir}}/{{appDir}}/server.rsa"
+  notify: "reload pm2"
