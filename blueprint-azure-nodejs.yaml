@@ -1,0 +1,239 @@
+tosca_definitions_version: cloudify_dsl_1_3
+
+description: >
+  Create Ubuntu VM in Azure.
+
+imports:
+  - https://cloudify.co/spec/cloudify/5.1.0/types.yaml
+  - plugin:cloudify-azure-plugin
+  - plugin:cloudify-ansible-plugin
+  - plugin:cloudify-utilities-plugin
+  - plugin:cloudify-managed-nagios-plugin
+  - nagios/nagios-setup.yaml
+
+inputs:
+
+  location:
+    type: string
+    description: Azure Region
+    default: eastus2
+
+  resource_group:
+    default: daclp-group
+
+  webserver_vm_size:
+    default: Standard_A1_v2
+
+  webserver_vm_image:
+    default:
+      publisher: Canonical
+      offer: UbuntuServer
+      sku: 18.04-LTS
+      version: latest
+
+  webserver_vm_os_family:
+    default: linux
+
+  webserver_vm_os_username:
+    default: azureuser
+
+dsl_definitions:
+  client_config: &client_config
+    subscription_id: { get_secret: azure_subscription_id }
+    tenant_id: { get_secret: azure_tenant_id }
+    client_id: { get_secret: azure_client_id }
+    client_secret: { get_secret: azure_client_secret }
+    endpoint_resource: { get_secret: endpoint_resource }
+    endpoints_resource_manager: { get_secret: endpoints_resource_manager }
+    endpoint_verify: True
+    endpoints_active_directory: { get_secret: endpoints_active_directory }
+
+node_templates:
+  resource_group:
+    type: cloudify.azure.nodes.ResourceGroup
+    properties:
+      client_config: *client_config
+      use_external_resource: true
+      name: { get_input: resource_group }
+      location: { get_input: location }
+
+  network:
+    type: cloudify.azure.nodes.network.VirtualNetwork
+    properties:
+      client_config: *client_config
+      use_external_resource: true
+      api_version: "2018-04-01"
+      name: { concat: [ { get_input: resource_group }, '-vnet' ] }
+      location: { get_input: location }
+    relationships:
+      - type: cloudify.azure.relationships.contained_in_resource_group
+        target: resource_group
+
+  subnet:
+    type: cloudify.azure.nodes.network.Subnet
+    properties:
+      client_config: *client_config
+      use_external_resource: true
+      api_version: "2018-04-01"
+      name: default
+      location: { get_input: location }
+    relationships:
+    - type: cloudify.azure.relationships.contained_in_virtual_network
+      target: network
+
+  agent_key:
+    type: cloudify.keys.nodes.RSAKey
+    properties:
+      resource_config:
+        key_name: cert_key
+        openssh_format: true
+      use_secret_store: true
+      use_secrets_if_exist: true
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        create:
+          implementation: keys.cloudify_ssh_key.operations.create
+          inputs:
+            store_private_key_material: true
+
+  webserver_vm:
+    type: cloudify.azure.nodes.compute.VirtualMachine
+    properties:
+      client_config: *client_config
+      api_version: "2018-04-01"
+      name: webserver
+      location: { get_input: location }
+      os_family: { get_input: webserver_vm_os_family }
+      resource_config:
+        hardwareProfile:
+          vmSize: { get_input: webserver_vm_size }
+        storageProfile:
+          imageReference: { get_input: webserver_vm_image }
+        osProfile:
+          computerName: { get_property: [SELF, name] }
+          adminUsername:  { get_input: webserver_vm_os_username }
+          adminPassword: ''
+          linuxConfiguration:
+            ssh:
+              publicKeys:
+                - path: {concat:[ '/home/', { get_input: webserver_vm_os_username }, '/.ssh/authorized_keys' ]}
+                  keyData: { get_attribute: [agent_key, public_key_export] }
+            disablePasswordAuthentication: true
+      agent_config:
+        install_method: remote
+        user: { get_input: webserver_vm_os_username }
+        key: { get_attribute: [agent_key, private_key_export] }
+      storage_endpoint: { get_input: endpoint_storage }
+    relationships:
+      - type: cloudify.azure.relationships.contained_in_resource_group
+        target: resource_group
+      - type: cloudify.azure.relationships.connected_to_nic
+        target: nic
+      - type: cloudify.azure.relationships.connected_to_storage_account
+        target: storage_account
+
+  storage_account:
+    type: cloudify.azure.nodes.storage.StorageAccount
+    properties:
+      name: webserversa01
+      location: { get_input: location }
+      resource_config:
+        accountType: Standard_LRS
+      client_config: *client_config
+    relationships:
+      - type: cloudify.azure.relationships.contained_in_resource_group
+        target: resource_group
+
+  nic:
+    type: cloudify.azure.nodes.network.NetworkInterfaceCard
+    properties:
+      location: { get_input: location }
+      client_config: *client_config
+    relationships:
+      - type: cloudify.azure.relationships.contained_in_resource_group
+        target: resource_group
+      - type: cloudify.azure.relationships.nic_connected_to_ip_configuration
+        target: ip_config
+
+  ip_config:
+    type: cloudify.azure.nodes.network.IPConfiguration
+    properties:
+      location: { get_input: location }
+      client_config: *client_config
+      resource_config:
+        privateIPAllocationMethod: Dynamic
+    relationships:
+      - type: cloudify.azure.relationships.ip_configuration_connected_to_subnet
+        target: subnet
+      - type: cloudify.azure.relationships.ip_configuration_connected_to_public_ip
+        target: public_ip
+
+  public_ip:
+    type: cloudify.azure.nodes.network.PublicIPAddress
+    properties:
+      location: { get_input: location }
+      client_config: *client_config
+      resource_config:
+        publicIPAllocationMethod: Static
+    relationships:
+      - type: cloudify.azure.relationships.contained_in_resource_group
+        target: resource_group
+
+  run_nodejs:
+    type: cloudify.nodes.ansible.Playbook
+    properties:
+      playbook_path: ansible/nodejs/site.yaml
+    relationships:
+      - type: cloudify.ansible.relationships.run_on_host
+        target: webserver_vm
+        source_interfaces:
+          cloudify.interfaces.relationship_lifecycle:
+            establish:
+              inputs:
+                sources:
+                  webservers:
+                    hosts:
+                      web:
+                        ansible_host: { get_attribute: [ webserver_vm, ip ] }
+                        ansible_user: { get_input: webserver_vm_os_username }
+                        ansible_ssh_private_key_file: { get_property: [ webserver_vm, agent_config, key ] }
+                        ansible_become: true
+                        ansible_ssh_common_args: -o StrictHostKeyChecking=no
+                options_config:
+                  extra_vars:
+                    homeDir: /home/azureuser
+
+  check_nodejs:
+    type: cloudify.nodes.Root
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        start: scripts/check_nodejs.sh
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: run_nodejs
+      - type: cloudify.relationships.contained_in
+        target: webserver_vm
+
+groups:
+  scalable_compute:
+    members:
+      - webserver_vm
+      - nic
+      - ip_config
+      - public_ip
+      - run_nodejs
+      - check_nodejs
+
+capabilities:
+
+  resource_group:
+    value: { get_attribute: [ resource_group, name ] }
+
+  location:
+    value: { get_input: location }
+
+  webserver_vm_public_ip:
+    value: { get_attribute: [ webserver_vm, public_ip ] }
+
+  webserver_vm_private_ip:
+    value: { get_attribute: [ webserver_vm, ip ] }
