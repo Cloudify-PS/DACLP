@@ -8,18 +8,16 @@ imports:
   - plugin:cloudify-azure-plugin
   - plugin:cloudify-ansible-plugin
   - plugin:cloudify-utilities-plugin
-  - plugin:cloudify-managed-nagios-plugin
-  - nagios/nagios-setup.yaml
 
 inputs:
 
   location:
     type: string
     description: Azure Region
-    default: eastus2
+    default: westeurope
 
   resource_group:
-    default: daclp-group
+    default: dhl-poc-rg
 
   webserver_vm_size:
     default: Standard_A1_v2
@@ -43,10 +41,10 @@ dsl_definitions:
     tenant_id: { get_secret: azure_tenant_id }
     client_id: { get_secret: azure_client_id }
     client_secret: { get_secret: azure_client_secret }
-    endpoint_resource: { get_secret: endpoint_resource }
-    endpoints_resource_manager: { get_secret: endpoints_resource_manager }
+    endpoint_resource: https://management.core.windows.net/
+    endpoints_resource_manager: https://management.azure.com
     endpoint_verify: True
-    endpoints_active_directory: { get_secret: endpoints_active_directory }
+    endpoints_active_directory: https://login.microsoftonline.com
 
 node_templates:
   resource_group:
@@ -123,7 +121,7 @@ node_templates:
         install_method: remote
         user: { get_input: webserver_vm_os_username }
         key: { get_attribute: [agent_key, private_key_export] }
-      storage_endpoint: { get_input: endpoint_storage }
+      storage_endpoint: core.windows.net
     relationships:
       - type: cloudify.azure.relationships.contained_in_resource_group
         target: resource_group
@@ -195,7 +193,7 @@ node_templates:
                     hosts:
                       web:
                         ansible_host: { get_attribute: [ webserver_vm, ip ] }
-                        ansible_user: { get_input: webserver_vm_os_username }
+                        ansible_user: { get_attribute: [ webserver_vm, resource, os_profile, admin_username ] }
                         ansible_ssh_private_key_file: { get_property: [ webserver_vm, agent_config, key ] }
                         ansible_become: true
                         ansible_ssh_common_args: -o StrictHostKeyChecking=no
