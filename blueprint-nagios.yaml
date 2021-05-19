@@ -2,8 +2,10 @@ tosca_definitions_version: cloudify_dsl_1_3
 
 
 imports:
+  - https://cloudify.co/spec/cloudify/5.2.0/types.yaml
   - plugin:cloudify-managed-nagios-plugin
   - plugin:cloudify-azure-plugin
+  - plugin:cloudify-utilities-plugin
   # - nagios/nagios-monitoring.yaml
 
 inputs:
@@ -33,8 +35,8 @@ node_templates:
     properties:
       nagios_web_username: { get_secret: nagios_user }
       nagios_web_password: { get_secret: nagios_password }
-      cloudify_manager_username: { get_secret: cfy_manager_rest_username }
-      cloudify_manager_password: { get_secret: cfy_manager_rest_password }
+      cloudify_manager_username: { get_secret: cloudify_manager_user_name }
+      cloudify_manager_password: { get_secret: cloudify_manager_user_password }
       trap_community: public
       component_log_level: DEBUG
       start_nagiosrest: true
@@ -49,12 +51,12 @@ node_templates:
       agent_config:
         install_method: remote
         user: centos
-        key: { get_attribute: [agent_key, private_key_export] }
+        key: { get_attribute: [nagios_agent_key, private_key_export] }
       name: nagios
       location: { get_input: location }
       os_family: linux
       use_public_ip: true
-      storage_endpoint: { get_input: endpoint_storage }
+      storage_endpoint: core.windows.net
       resource_config:
         hardwareProfile:
           vmSize: Standard_A1_v2
@@ -71,7 +73,7 @@ node_templates:
             ssh:
               publicKeys:
                 - path: /home/centos/.ssh/authorized_keys
-                  keyData: { get_attribute: [agent_key, public_key_export] }
+                  keyData: { get_attribute: [nagios_agent_key, public_key_export] }
             disablePasswordAuthentication: true
     relationships:
       - type: cloudify.azure.relationships.contained_in_resource_group
@@ -112,6 +114,21 @@ node_templates:
     relationships:
     - type: cloudify.azure.relationships.contained_in_virtual_network
       target: network
+
+  nagios_agent_key:
+    type: cloudify.keys.nodes.RSAKey
+    properties:
+      resource_config:
+        key_name: cert_key
+        openssh_format: true
+      use_secret_store: true
+      use_secrets_if_exist: true
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        create:
+          implementation: keys.cloudify_ssh_key.operations.create
+          inputs:
+            store_private_key_material: true
 
   nagios_storage_account:
     type: cloudify.azure.nodes.storage.StorageAccount
