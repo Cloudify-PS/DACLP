@@ -88,8 +88,8 @@ node_templates:
     properties:
       client:
         host: 127.0.0.1
-        username: { get_secret: user_name }
-        password: { get_secret: user_password }
+        username: { get_secret: cloudify_manager_user_name }
+        password: { get_secret: cloudify_manager_user_password }
         tenant: { get_input: target_resource_tenant }
       resource_config:
         blueprint:
@@ -102,6 +102,8 @@ node_templates:
           auto_inc_suffix: false
           inputs:
             cpu_idle_threshold: { get_input: cpu_idle_threshold }
+            location: { get_input: location }
+            resource_group: { get_input: resource_group }
 
 outputs:
   resource_group:
