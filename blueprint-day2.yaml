@@ -51,6 +51,12 @@ inputs:
   webserver_vm_os_username:
     default: azureuser
 
+  cpu_idle_threshold:
+    type: integer
+    default: 20
+    description: >
+      idle percentage to trigger scaling
+
 node_templates:
   azure_vm:
     type: cloudify.nodes.ServiceComponent
@@ -64,7 +70,7 @@ node_templates:
         blueprint:
           external_resource: false
           id: { concat: ['azure-vm-', { get_input: app_server_type }, '-bp'] }
-          blueprint_archive: https://github.com/Cloudify-PS/DACLP/archive/refs/heads/day1.zip
+          blueprint_archive: https://github.com/Cloudify-PS/DACLP/archive/refs/heads/day2.zip
           main_file_name: { concat: ['blueprint-azure-', { get_input: app_server_type }, '.yaml'] }
         deployment:
           id: azure-vm-deployment
@@ -76,6 +82,26 @@ node_templates:
             webserver_vm_image: { get_input: webserver_vm_image }
             webserver_vm_os_family: { get_input: webserver_vm_os_family }
             webserver_vm_os_username: { get_input: webserver_vm_os_username }
+
+  nagios_monitoring:
+    type: cloudify.nodes.ServiceComponent
+    properties:
+      client:
+        host: 127.0.0.1
+        username: { get_secret: user_name }
+        password: { get_secret: user_password }
+        tenant: { get_input: target_resource_tenant }
+      resource_config:
+        blueprint:
+          external_resource: false
+          id: nagios-bp
+          blueprint_archive: https://github.com/Cloudify-PS/DACLP/archive/refs/heads/day2.zip
+          main_file_name: blueprint-nagios.yaml
+        deployment:
+          id: nagios-deployment
+          auto_inc_suffix: false
+          inputs:
+            cpu_idle_threshold: { get_input: cpu_idle_threshold }
 
 outputs:
   resource_group:

@@ -1,0 +1,142 @@
+tosca_definitions_version: cloudify_dsl_1_3
+
+
+imports:
+  - plugin:cloudify-managed-nagios-plugin
+  - plugin:cloudify-azure-plugin
+  - nagios/nagios-monitoring.yaml
+
+
+dsl_definitions:
+  client_config: &client_config
+    subscription_id: { get_secret: azure_subscription_id }
+    tenant_id: { get_secret: azure_tenant_id }
+    client_id: { get_secret: azure_client_id }
+    client_secret: { get_secret: azure_client_secret }
+    endpoint_resource: https://management.core.windows.net/
+    endpoints_resource_manager: https://management.azure.com
+    endpoint_verify: True
+    endpoints_active_directory: https://login.microsoftonline.com
+
+node_templates:
+
+  nagios:
+    type: cloudify.nagios.nodes.Nagios
+    properties:
+      nagios_web_username: { get_secret: nagios_user }
+      nagios_web_password: { get_secret: nagios_password }
+      cloudify_manager_username: { get_secret: cfy_manager_rest_username }
+      cloudify_manager_password: { get_secret: cfy_manager_rest_password }
+      trap_community: public
+      component_log_level: DEBUG
+      start_nagiosrest: true
+    relationships:
+      - type: cloudify.relationships.contained_in
+        target: nagios_vm
+
+  nagios_vm:
+    type: cloudify.azure.nodes.compute.VirtualMachine
+    properties:
+      client_config: *client_config
+      agent_config:
+        install_method: remote
+        user: centos
+        key: { get_attribute: [agent_key, private_key_export] }
+      name: nagios
+      location: { get_input: location }
+      os_family: linux
+      use_public_ip: true
+      storage_endpoint: { get_input: endpoint_storage }
+      resource_config:
+        hardwareProfile:
+          vmSize: Standard_A1_v2
+        storageProfile:
+          imageReference:
+            publisher: OpenLogic
+            offer: CentOS
+            sku: "7_9"
+            version: "7.9.2020111900"
+        osProfile:
+          computerName: { get_property: [SELF, name] }
+          adminUsername:  centos
+          linuxConfiguration:
+            ssh:
+              publicKeys:
+                - path: /home/centos/.ssh/authorized_keys
+                  keyData: { get_attribute: [agent_key, public_key_export] }
+            disablePasswordAuthentication: true
+    relationships:
+      - type: cloudify.azure.relationships.contained_in_resource_group
+        target: resource_group
+      - type: cloudify.azure.relationships.connected_to_nic
+        target: nagios_nic
+      - type: cloudify.azure.relationships.connected_to_storage_account
+        target: nagios_storage_account
+
+  nagios_storage_account:
+    type: cloudify.azure.nodes.storage.StorageAccount
+    properties:
+      name: nagiossa
+      location: { get_input: location }
+      resource_config:
+        accountType: Standard_LRS
+      client_config: *client_config
+    relationships:
+      - type: cloudify.azure.relationships.contained_in_resource_group
+        target: resource_group
+
+  nagios_nic:
+    type: cloudify.azure.nodes.network.NetworkInterfaceCard
+    properties:
+      location: { get_input: location }
+      client_config: *client_config
+    relationships:
+      - type: cloudify.azure.relationships.contained_in_resource_group
+        target: resource_group
+      - type: cloudify.azure.relationships.nic_connected_to_ip_configuration
+        target: nagios_ip_config
+
+  nagios_ip_config:
+    type: cloudify.azure.nodes.network.IPConfiguration
+    properties:
+      location: { get_input: location }
+      client_config: *client_config
+      resource_config:
+        privateIPAllocationMethod: Dynamic
+    relationships:
+      - type: cloudify.azure.relationships.ip_configuration_connected_to_subnet
+        target: subnet
+      - type: cloudify.azure.relationships.ip_configuration_connected_to_public_ip
+        target: nagios_public_ip
+
+  nagios_public_ip:
+    type: cloudify.azure.nodes.network.PublicIPAddress
+    properties:
+      location: { get_input: location }
+      client_config: *client_config
+      resource_config:
+        publicIPAllocationMethod: Static
+    relationships:
+      - type: cloudify.azure.relationships.contained_in_resource_group
+        target: resource_group
+
+capabilities:
+  nagios_address:
+    description: Internal Nagios address
+    value: { get_attribute: [nagios_vm, ip] }
+
+  nagios_public_address:
+    description: Public Nagios address
+    value: { get_attribute: [nagios_vm, public_ip] }
+
+  nagios_ssl_certificate:
+    description: SSL certificate for accessing Nagios UI and REST
+    value: { get_attribute: [nagios, ssl_certificate] }
+
+  nagios_user:
+    description: User for Nagios REST interface
+    value: { get_property: [nagios, nagios_web_username] }
+
+  nagios_password:
+    description: Password for Nagios REST interface
+    value: { get_property: [nagios, nagios_web_password] }
