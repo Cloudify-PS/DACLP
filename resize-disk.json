@@ -1,12 +1,26 @@
 {
-   "args":{
-      "hardwareProfile":{
-         "vmSize":"Standard_A1_v2"
-      },
-      "storageProfile":{
-         "os_disk":{
-            "diskSizeGB":"70"
+   "operation":"cloudify.interfaces.lifecycle.create",
+   "operation_kwargs":{
+      "args":{
+         "hardwareProfile":{
+            "vmSize":"Standard_A1_v2"
+         },
+         "storageProfile":{
+            "os_disk":{
+               "diskSizeGB":"70"
+            }
          }
       }
-   }
+   },
+   "allow_kwargs_override":true,
+   "run_by_dependency_order":false,
+   "type_names":[
+
+   ],
+   "node_ids":[
+      "webserver_vm"
+   ],
+   "node_instance_ids":[
+
+   ]
 }
