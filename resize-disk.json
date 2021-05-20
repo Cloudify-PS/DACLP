@@ -1,0 +1,12 @@
+{
+   "args":{
+      "hardwareProfile":{
+         "vmSize":"Standard_A1_v2"
+      },
+      "storageProfile":{
+         "os_disk":{
+            "diskSizeGB":"70"
+         }
+      }
+   }
+}
