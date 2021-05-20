@@ -101,7 +101,7 @@ node_templates:
           id: nagios-deployment
           auto_inc_suffix: false
           inputs:
-            cpu_idle_threshold: { get_input: cpu_idle_threshold }
+            # cpu_idle_threshold: { get_input: cpu_idle_threshold }
             location: { get_input: location }
             resource_group: { get_input: resource_group }
 
@@ -117,3 +117,15 @@ outputs:
 
   webserver_vm_private_ip:
     value: { get_attribute: [azure_vm, capabilities, webserver_vm_private_ip] }
+
+  nagios_public_address:
+    value: { get_attribute: [nagios_monitoring, capabilities, nagios_public_address] }
+
+  nagios_ssl_certificate:
+    value: { get_attribute: [nagios_monitoring, capabilities, nagios_ssl_certificate] }
+
+  nagios_user:
+    value: { get_attribute: [nagios_monitoring, capabilities, nagios_user] }
+
+  nagios_password:
+    value: { get_attribute: [nagios_monitoring, capabilities, nagios_password] }
