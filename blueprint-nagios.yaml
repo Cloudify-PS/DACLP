@@ -4,9 +4,10 @@ tosca_definitions_version: cloudify_dsl_1_3
 imports:
   - https://cloudify.co/spec/cloudify/5.2.0/types.yaml
   - plugin:cloudify-managed-nagios-plugin
+  - plugin:cloudify-nagiosrest-plugin
   - plugin:cloudify-azure-plugin
   - plugin:cloudify-utilities-plugin
-  # - nagios/nagios-monitoring.yaml
+  - nagios/nagios-monitoring.yaml
 
 inputs:
   location:
@@ -43,6 +44,17 @@ node_templates:
     relationships:
       - type: cloudify.relationships.contained_in
         target: nagios_vm
+      - type: cloudify.relationships.depends_on
+        target: disable_ipv6
+
+  disable_ipv6:
+    type: cloudify.nodes.Root
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        start: scripts/disable_ipv6.sh
+    relationships:
+      - type: cloudify.relationships.contained_in
+        target: nagios_vm
 
   nagios_vm:
     type: cloudify.azure.nodes.compute.VirtualMachine
@@ -67,8 +79,13 @@ node_templates:
             sku: "7_9"
             version: "7.9.2020111900"
         osProfile:
+          custom_data: |
+            #cloud-config
+            runcmd:
+              - sysctl -w net.ipv6.conf.all.disable_ipv6=1
+              - sysctl -w net.ipv6.conf.default.disable_ipv6=1
           computerName: { get_property: [SELF, name] }
-          adminUsername:  centos
+          adminUsername: centos
           linuxConfiguration:
             ssh:
               publicKeys:
@@ -180,7 +197,7 @@ node_templates:
 capabilities:
   nagios_address:
     description: Internal Nagios address
-    value: { get_attribute: [nagios_vm, ip] }
+    value: { get_attribute: [nagios_nic, ip] }
 
   nagios_public_address:
     description: Public Nagios address

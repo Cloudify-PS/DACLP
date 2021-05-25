@@ -8,6 +8,7 @@ imports:
   - plugin:cloudify-azure-plugin
   - plugin:cloudify-ansible-plugin
   - plugin:cloudify-utilities-plugin
+  - plugin:cloudify-nagiosrest-plugin
 
 inputs:
 
@@ -35,6 +36,29 @@ inputs:
   webserver_vm_os_username:
     default: azureuser
 
+  deployment_id:
+    type: string
+
+  nagios_address:
+    type: string
+    description: >
+      Nagios address
+
+  nagios_ssl_certificate:
+    type: string
+    description: >
+      Nagios REST SSL certificate
+
+  nagios_user:
+    type: string
+    description: >
+      Nagios REST user name
+
+  nagios_password:
+    type: string
+    description: >
+      Nagios REST password
+
 dsl_definitions:
   client_config: &client_config
     subscription_id: { get_secret: azure_subscription_id }
@@ -45,6 +69,17 @@ dsl_definitions:
     endpoints_resource_manager: https://management.azure.com
     endpoint_verify: True
     endpoints_active_directory: https://login.microsoftonline.com
+
+node_types:
+  cloudify.nodes.MonitoredServer:
+    derived_from: cloudify.azure.nodes.compute.VirtualMachine
+    properties:
+      nagiosrest_monitoring:
+        type: cloudify.datatypes.nagiosrest.Properties
+    interfaces:
+      cloudify.interfaces.monitoring:
+        start: nagiosrest.nagiosrest_plugin.tasks.add_monitoring
+        stop: nagiosrest.nagiosrest_plugin.tasks.remove_monitoring
 
 node_templates:
   resource_group:
@@ -95,13 +130,14 @@ node_templates:
             store_private_key_material: true
 
   webserver_vm:
-    type: cloudify.azure.nodes.compute.VirtualMachine
+    type: cloudify.nodes.MonitoredServer
     properties:
       client_config: *client_config
       api_version: "2018-04-01"
       name: webserver
       location: { get_input: location }
       os_family: { get_input: webserver_vm_os_family }
+      storage_endpoint: core.windows.net
       resource_config:
         hardwareProfile:
           vmSize: { get_input: webserver_vm_size }
@@ -121,7 +157,13 @@ node_templates:
         install_method: remote
         user: { get_input: webserver_vm_os_username }
         key: { get_attribute: [agent_key, private_key_export] }
-      storage_endpoint: core.windows.net
+      nagiosrest_monitoring:
+        instance_ip_property: ip
+        address: { get_input: nagios_address }
+        certificate: { get_input: nagios_ssl_certificate }
+        username: { get_input: nagios_user }
+        password: { get_input: nagios_password }
+        target_type: app_vm_heal_target_type
     relationships:
       - type: cloudify.azure.relationships.contained_in_resource_group
         target: resource_group
@@ -212,15 +254,42 @@ node_templates:
       - type: cloudify.relationships.contained_in
         target: webserver_vm
 
+  snmp_conf:
+    type: cloudify.nodes.SoftwareComponent
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        create:
+          implementation: scripts/snmp_install.sh
+          inputs:
+            snmp_user: { get_secret: snmp_user }
+            snmp_pass: { get_secret: snmp_pass }
+    relationships:
+      - type: cloudify.relationships.contained_in
+        target: webserver_vm
+      - type: cloudify.relationships.depends_on
+        target: check_nginx
+
 groups:
   scalable_compute:
     members:
+      - resource_group
       - webserver_vm
+      - storage_account
       - nic
       - ip_config
       - public_ip
       - run_nginx
       - check_nginx
+      - snmp_conf
+
+policies:
+  vm_scaling_policy:
+    type: cloudify.policies.scaling
+    properties:
+      default_instances: 1
+      min_instances: 1
+      max_instances: 5
+    targets: [scalable_compute]
 
 capabilities:
 
