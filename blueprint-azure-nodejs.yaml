@@ -267,7 +267,7 @@ node_templates:
       - type: cloudify.relationships.contained_in
         target: webserver_vm
       - type: cloudify.relationships.depends_on
-        target: check_nginx
+        target: check_nodejs
 
 groups:
   scalable_compute:
