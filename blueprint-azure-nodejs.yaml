@@ -219,6 +219,16 @@ node_templates:
       - type: cloudify.azure.relationships.contained_in_resource_group
         target: resource_group
 
+  upgrade_vm:
+    type: cloudify.nodes.Root
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        upgrade:
+          implementation: scripts/do_upgrade.sh
+    relationships:
+      - type: cloudify.relationships.contained_in
+        target: webserver_vm
+
   run_nodejs:
     type: cloudify.nodes.ansible.Playbook
     properties:
@@ -278,6 +288,7 @@ groups:
       - nic
       - ip_config
       - public_ip
+      - upgrade_vm
       - run_nodejs
       - check_nodejs
       - snmp_conf
