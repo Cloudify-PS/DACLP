@@ -28,31 +28,24 @@ node_templates:
     type: cloudify.nagios.nodes.TargetType
     properties:
       name: app_vm_heal_target_type
-      alias: Alias of app_vm_heal_target_type
+      alias: Ping to check instance health
       instance_health_check: check-host-icmp
       action_on_instance_failure: *app_cause_icmp
       check_interval: 0.25
-      max_check_retries: 5
+      max_check_retries: 3
       snmp_properties:
         v3: *v3_snmp
     relationships:
       - type: cloudify.nagios.target_type_checks
-        target: check_process
+        target: reachability_check
       - type: cloudify.nagios.configuration_for_nagios_server
         target: nagios
 
-  check_process:
+  reachability_check:
     type: cloudify.nagios.nodes.SNMPValueCheck
     properties:
-      check_description: Get error flag for process
-      snmp_oid: .1.3.6.1.4.1.2021.2.1.100.1
-      high_critical_threshold: 1
-      action_on_high_threshold: *app_cause_icmp
-      check_interval: 0.25
-      max_check_retries: 0
-    relationships:
-      - type: cloudify.relationships.contained_in
-        target: nagios
+      check_description: 1 minute load average
+      snmp_oid: UCD-SNMP-MIB::laLoad.1
 
   cluster_scale_target_type:
     type: cloudify.nagios.nodes.TargetType
