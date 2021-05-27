@@ -143,8 +143,9 @@ node_templates:
     type: cloudify.nodes.Root
     interfaces:
       cloudify.interfaces.lifecycle:
-        start: scripts/generate_suffix.sh
-        executor: central_deployment_agent
+        start: 
+          implementation: scripts/generate_suffix.sh
+          executor: central_deployment_agent
 
   webserver_vm:
     type: cloudify.nodes.MonitoredServer
