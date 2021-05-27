@@ -162,7 +162,7 @@ node_templates:
         storageProfile:
           imageReference: { get_input: webserver_vm_image }
         osProfile:
-          computerName: { get_property: [SELF, name] }
+          # computerName: { get_property: [SELF, name] }
           adminUsername:  { get_input: webserver_vm_os_username }
           adminPassword: ''
           linuxConfiguration:
