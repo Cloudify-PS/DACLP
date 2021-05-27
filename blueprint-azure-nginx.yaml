@@ -138,14 +138,20 @@ node_templates:
           implementation: keys.cloudify_ssh_key.operations.create
           inputs:
             store_private_key_material: true
-        start: scripts/generate_suffix.sh
+
+  generate_suffix:
+    type: cloudify.nodes.Root
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        start: scripts/check_nginx.sh
+        executor: central_deployment_agent
 
   webserver_vm:
     type: cloudify.nodes.MonitoredServer
     properties:
       client_config: *client_config
       api_version: "2018-04-01"
-      name: { concat: ['webserver-',  { get_attribute: [agent_key, suffix] }] }
+      name: { concat: ['webserver-',  { get_attribute: [generate_suffix, suffix] }] }
       location: { get_input: location }
       os_family: { get_input: webserver_vm_os_family }
       storage_endpoint: core.windows.net
@@ -201,7 +207,7 @@ node_templates:
   storage_account:
     type: cloudify.azure.nodes.storage.StorageAccount
     properties:
-      name: { concat: ['webserversa',  { get_attribute: [agent_key, suffix] }] }
+      name: { concat: ['webserversa',  { get_attribute: [generate_suffix, suffix] }] }
       location: { get_input: location }
       resource_config:
         accountType: Standard_LRS
@@ -210,7 +216,7 @@ node_templates:
       - type: cloudify.azure.relationships.contained_in_resource_group
         target: resource_group
       - type: cloudify.relationships.depends_on
-        target: agent_key
+        target: generate_suffix
 
   nic:
     type: cloudify.azure.nodes.network.NetworkInterfaceCard
@@ -312,6 +318,7 @@ groups:
     members:
       - resource_group
       - agent_key
+      - generate_suffix
       - webserver_vm
       - scale_monitor_node
       - storage_account
