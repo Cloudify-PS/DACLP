@@ -54,7 +54,13 @@ inputs:
     type: integer
     default: 20
     description: >
-      idle percentage to trigger scaling
+      idle percentage to trigger scale-out
+
+  storage_percentage_threshold:
+    type: integer
+    default: 60
+    description: >
+      percentage of used storage to trigger storage scale-up
 
 node_templates:
   nagios_monitoring:
@@ -76,6 +82,7 @@ node_templates:
           auto_inc_suffix: false
           inputs:
             cpu_idle_threshold: { get_input: cpu_idle_threshold }
+            storage_percentage_threshold: { get_input: storage_percentage_threshold }
             location: { get_input: location }
             resource_group: { get_input: resource_group }
 
