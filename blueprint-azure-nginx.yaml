@@ -139,20 +139,11 @@ node_templates:
           inputs:
             store_private_key_material: true
 
-  # generate_suffix:
-  #   type: cloudify.nodes.Root
-  #   interfaces:
-  #     cloudify.interfaces.lifecycle:
-  #       start:
-  #         implementation: scripts/generate_suffix.sh
-  #         executor: central_deployment_agent
-
   webserver_vm:
     type: cloudify.nodes.MonitoredServer
     properties:
       client_config: *client_config
       api_version: "2018-04-01"
-      # name: { concat: ['webserver-',  { get_attribute: [generate_suffix, suffix] }] }
       location: { get_input: location }
       os_family: { get_input: webserver_vm_os_family }
       storage_endpoint: core.windows.net
@@ -162,7 +153,6 @@ node_templates:
         storageProfile:
           imageReference: { get_input: webserver_vm_image }
         osProfile:
-          # computerName: { get_property: [SELF, name] }
           adminUsername:  { get_input: webserver_vm_os_username }
           adminPassword: ''
           linuxConfiguration:
@@ -190,24 +180,32 @@ node_templates:
       - type: cloudify.azure.relationships.connected_to_storage_account
         target: storage_account
 
-  # scale_monitor_node:
-  #   type: cloudify.nodes.MonitorNode
-  #   properties:
-  #     nagiosrest_monitoring:
-  #       instance_ip_property: ip
-  #       address: { get_input: nagios_address }
-  #       certificate: { get_input: nagios_ssl_certificate }
-  #       username: { get_input: nagios_user }
-  #       password: { get_input: nagios_password }
-  #       target_type: cluster_scale_target_type
-  #   relationships:
-  #     - type: cloudify.relationships.contained_in
-  #       target: webserver_vm
+  scale_monitor_node:
+    type: cloudify.nodes.MonitorNode
+    properties:
+      nagiosrest_monitoring:
+        instance_ip_property: ip
+        address: { get_input: nagios_address }
+        certificate: { get_input: nagios_ssl_certificate }
+        username: { get_input: nagios_user }
+        password: { get_input: nagios_password }
+        target_type: cluster_scale_target_type
+    relationships:
+      - type: cloudify.relationships.contained_in
+        target: webserver_vm
+        source_interfaces:
+          cloudify.interfaces.relationship_lifecycle:
+            preconfigure:
+              implementation: scripts/set_runtime_properties.py
+              executor: central_deployment_agent
+              inputs:
+                runtime_properties:
+                  - name: ip
+                    value: { get_attribute: [webserver_vm, ip] }
 
   storage_account:
     type: cloudify.azure.nodes.storage.StorageAccount
     properties:
-      # name: { concat: ['webserversa',  { get_attribute: [generate_suffix, suffix] }] }
       location: { get_input: location }
       resource_config:
         accountType: Standard_LRS
@@ -215,8 +213,6 @@ node_templates:
     relationships:
       - type: cloudify.azure.relationships.contained_in_resource_group
         target: resource_group
-      # - type: cloudify.relationships.depends_on
-      #   target: generate_suffix
 
   nic:
     type: cloudify.azure.nodes.network.NetworkInterfaceCard
@@ -317,10 +313,8 @@ groups:
   scalable_compute:
     members:
       - resource_group
-      # - agent_key
-      # - generate_suffix
       - webserver_vm
-      # - scale_monitor_node
+      - scale_monitor_node
       - storage_account
       - nic
       - ip_config
@@ -342,7 +336,7 @@ policies:
 capabilities:
 
   resource_group:
-    value: { get_attribute: [ resource_group, name ] }
+    value: { get_input: resource_group }
 
   location:
     value: { get_input: location }
