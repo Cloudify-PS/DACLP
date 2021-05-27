@@ -215,8 +215,8 @@ node_templates:
     relationships:
       - type: cloudify.azure.relationships.contained_in_resource_group
         target: resource_group
-      - type: cloudify.relationships.depends_on
-        target: generate_suffix
+      # - type: cloudify.relationships.depends_on
+      #   target: generate_suffix
 
   nic:
     type: cloudify.azure.nodes.network.NetworkInterfaceCard
@@ -318,7 +318,7 @@ groups:
     members:
       - resource_group
       - agent_key
-      - generate_suffix
+      # - generate_suffix
       - webserver_vm
       # - scale_monitor_node
       - storage_account
