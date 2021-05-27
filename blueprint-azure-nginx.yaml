@@ -317,7 +317,7 @@ groups:
   scalable_compute:
     members:
       - resource_group
-      - agent_key
+      # - agent_key
       # - generate_suffix
       - webserver_vm
       # - scale_monitor_node
