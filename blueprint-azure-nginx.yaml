@@ -81,6 +81,16 @@ node_types:
         start: nagiosrest.nagiosrest_plugin.tasks.add_monitoring
         stop: nagiosrest.nagiosrest_plugin.tasks.remove_monitoring
 
+  cloudify.nodes.MonitorNode:
+    derived_from: cloudify.nodes.Root
+    properties:
+      nagiosrest_monitoring:
+        type: cloudify.datatypes.nagiosrest.Properties
+    interfaces:
+      cloudify.interfaces.monitoring:
+        start: nagiosrest.nagiosrest_plugin.tasks.add_monitoring
+        stop: nagiosrest.nagiosrest_plugin.tasks.remove_monitoring
+
 node_templates:
   resource_group:
     type: cloudify.azure.nodes.ResourceGroup
@@ -128,13 +138,14 @@ node_templates:
           implementation: keys.cloudify_ssh_key.operations.create
           inputs:
             store_private_key_material: true
+        start: scripts/generate_suffix.sh
 
   webserver_vm:
     type: cloudify.nodes.MonitoredServer
     properties:
       client_config: *client_config
       api_version: "2018-04-01"
-      name: webserver
+      name: { concat: ['webserver-',  { get_attribute: [agent_key, suffix] }] }
       location: { get_input: location }
       os_family: { get_input: webserver_vm_os_family }
       storage_endpoint: core.windows.net
@@ -172,10 +183,25 @@ node_templates:
       - type: cloudify.azure.relationships.connected_to_storage_account
         target: storage_account
 
+  scale_monitor_node:
+    type: cloudify.nodes.MonitorNode
+    properties:
+      nagiosrest_monitoring:
+        instance_ip_property: ip
+        address: { get_input: nagios_address }
+        certificate: { get_input: nagios_ssl_certificate }
+        username: { get_input: nagios_user }
+        password: { get_input: nagios_password }
+        target_type: cluster_scale_target_type
+        # deployment_override: { get_input: cluster_deployment }
+    relationships:
+      - type: cloudify.relationships.contained_in
+        target: vm
+
   storage_account:
     type: cloudify.azure.nodes.storage.StorageAccount
     properties:
-      name: webserversa01
+      name: { concat: ['webserversa',  { get_attribute: [agent_key, suffix] }] }
       location: { get_input: location }
       resource_config:
         accountType: Standard_LRS
@@ -183,6 +209,8 @@ node_templates:
     relationships:
       - type: cloudify.azure.relationships.contained_in_resource_group
         target: resource_group
+      - type: cloudify.relationships.depends_on
+        target: agent_key
 
   nic:
     type: cloudify.azure.nodes.network.NetworkInterfaceCard
@@ -283,7 +311,9 @@ groups:
   scalable_compute:
     members:
       - resource_group
+      - agent_key
       - webserver_vm
+      - scale_monitor_node
       - storage_account
       - nic
       - ip_config

@@ -69,7 +69,7 @@ node_templates:
         blueprint:
           external_resource: false
           id: nagios-bp
-          blueprint_archive: https://github.com/Cloudify-PS/DACLP/archive/refs/heads/day3.zip
+          blueprint_archive: https://github.com/Cloudify-PS/DACLP/archive/refs/heads/day3_dev.zip
           main_file_name: blueprint-nagios.yaml
         deployment:
           id: nagios-deployment
@@ -92,7 +92,7 @@ node_templates:
           external_resource: false
           id: azure-vm-nginx-bp
           id: { concat: ['azure-vm-', { get_input: app_server_type }, '-bp'] }
-          blueprint_archive: https://github.com/Cloudify-PS/DACLP/archive/refs/heads/day3.zip
+          blueprint_archive: https://github.com/Cloudify-PS/DACLP/archive/refs/heads/day3_dev.zip
           main_file_name: { concat: ['blueprint-azure-', { get_input: app_server_type }, '.yaml'] }
         deployment:
           id: azure-vm-deployment
