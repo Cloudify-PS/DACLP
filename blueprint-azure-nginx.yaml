@@ -143,7 +143,7 @@ node_templates:
     type: cloudify.nodes.Root
     interfaces:
       cloudify.interfaces.lifecycle:
-        start: scripts/check_nginx.sh
+        start: scripts/generate_suffix.sh
         executor: central_deployment_agent
 
   webserver_vm:
