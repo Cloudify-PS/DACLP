@@ -56,11 +56,12 @@ inputs:
     description: >
       idle percentage to trigger scale-out
 
-  storage_percentage_threshold:
+  free_storage_percentage_threshold:
     type: integer
-    default: 60
+    default: 25
     description: >
-      percentage of used storage to trigger storage scale-up
+      Percentage of free storage to trigger storage scale-up.
+      Workflow will be started if the percentage of free space is below the specified value
 
 node_templates:
   nagios_monitoring:
@@ -82,7 +83,6 @@ node_templates:
           auto_inc_suffix: false
           inputs:
             cpu_idle_threshold: { get_input: cpu_idle_threshold }
-            storage_percentage_threshold: { get_input: storage_percentage_threshold }
             location: { get_input: location }
             resource_group: { get_input: resource_group }
 
@@ -112,6 +112,7 @@ node_templates:
             webserver_vm_os_family: { get_input: webserver_vm_os_family }
             webserver_vm_os_username: { get_input: webserver_vm_os_username }
             deployment_id: azure-vm-deployment
+            free_storage_percentage_threshold: { get_input: free_storage_percentage_threshold }
             nagios_address: { get_attribute: [nagios_monitoring, capabilities, nagios_address] }
             nagios_ssl_certificate: { get_attribute: [nagios_monitoring, capabilities, nagios_ssl_certificate] }
             nagios_user: { get_attribute: [nagios_monitoring, capabilities, nagios_user] }

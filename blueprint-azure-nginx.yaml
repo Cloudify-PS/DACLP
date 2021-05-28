@@ -59,6 +59,11 @@ inputs:
     description: >
       Nagios REST password
 
+  free_storage_percentage_threshold:
+    type: integer
+    description: >
+      SNMP configuration for free storage threshold
+
 dsl_definitions:
   client_config: &client_config
     subscription_id: { get_secret: azure_subscription_id }
@@ -301,6 +306,7 @@ node_templates:
         create:
           implementation: scripts/snmp_install.sh
           inputs:
+            free_storage_percentage_threshold: { get_input: free_storage_percentage_threshold } 
             snmp_user: { get_secret: snmp_user }
             snmp_pass: { get_secret: snmp_pass }
     relationships:
