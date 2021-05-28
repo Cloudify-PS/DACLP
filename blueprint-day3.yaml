@@ -97,7 +97,6 @@ node_templates:
       resource_config:
         blueprint:
           external_resource: false
-          id: azure-vm-nginx-bp
           id: { concat: ['azure-vm-', { get_input: app_server_type }, '-bp'] }
           blueprint_archive: https://github.com/Cloudify-PS/DACLP/archive/refs/heads/day3_dev.zip
           main_file_name: { concat: ['blueprint-azure-', { get_input: app_server_type }, '.yaml'] }
