@@ -96,7 +96,7 @@ node_templates:
       - type: cloudify.nagios.target_type_checks
         target: storage_check
       - type: cloudify.nagios.target_type_checks
-       target: ram_check
+        target: ram_check
 
   cpu_load_check:
     type: cloudify.nagios.nodes.SNMPValueCheck
