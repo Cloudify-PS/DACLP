@@ -12,7 +12,7 @@ rouser ${snmp_user} priv -V CloudifyMonitoringView
 disk / ${free_storage_percentage_threshold}
 proc nginx
 proc systemd
-monitor -u {snmp_user} -r 10 -o memTotalReal.0 -o memAvailReal.0 "Real Memory" memAvailReal.0 < ${target_free}
+monitor -u ${snmp_user} -r 10 -o memTotalReal.0 -o memAvailReal.0 \"Real Memory\" memAvailReal.0 < ${target_free}
 " | sudo tee /etc/snmp/snmpd.conf
 sudo service snmpd restart
 sudo systemctl enable snmpd
