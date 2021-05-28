@@ -95,8 +95,8 @@ node_templates:
         target: cpu_load_check
       - type: cloudify.nagios.target_type_checks
         target: storage_check
-      # - type: cloudify.nagios.target_type_checks
-      #   target: ram_check
+      - type: cloudify.nagios.target_type_checks
+       target: ram_check
 
   cpu_load_check:
     type: cloudify.nagios.nodes.SNMPValueCheck
@@ -124,17 +124,12 @@ node_templates:
       - type: cloudify.relationships.contained_in
         target: nagios
 
-  # ram_check:
-  #   type: cloudify.nagios.nodes.SNMPAggregateValueCheck
-  #   properties:
-  #     check_description: Get sum of used ram
-  #     snmp_oids: .1.3.6.1.4.1.2021.4.6, .1.3.6.1.4.1.2021.4.15, .1.3.6.1.4.1.2021.4.14
-  #     low_critical_threshold: 1613591
-  #     action_on_low_threshold: *app_cause_snmp_ram
-  #     aggregation_type: sum
-  #     check_interval: 0.25
-  #     max_check_retries: 0
-  #     on_unknown: ignore
-  #   relationships:
-  #     - type: cloudify.relationships.contained_in
-  #       target: nagios
+   ram_check:
+    type: cloudify.nagios.nodes.SNMPTrapReaction
+    properties:
+      trap_oid: UCD-SNMP-MIB::memAvailReal.0
+      oid_for_message: UCD-SNMP-MIB::memTotalReal.0
+      reaction: *app_cause_snmp_ram
+    relationships:
+      - type: cloudify.relationships.contained_in
+        target: nagios

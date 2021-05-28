@@ -52,6 +52,12 @@ inputs:
     description: >
       SNMP configuration for free storage threshold
 
+  used_memory_percent:
+    type: string
+      description: >
+        A decimal fraction of total memory that triggers scale up.
+      default: 0.8
+
 dsl_definitions:
   client_config: &client_config
     subscription_id: { get_secret: azure_subscription_id }
@@ -263,6 +269,7 @@ node_templates:
             free_storage_percentage_threshold: { get_input: free_storage_percentage_threshold } 
             snmp_user: { get_secret: snmp_user }
             snmp_pass: { get_secret: snmp_pass }
+            used_memory_percent: { get_input: used_memory_percent }
     relationships:
       - type: cloudify.relationships.contained_in
         target: webserver_vm
