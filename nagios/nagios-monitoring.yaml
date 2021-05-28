@@ -124,7 +124,7 @@ node_templates:
       - type: cloudify.relationships.contained_in
         target: nagios
 
-   ram_check:
+  ram_check:
     type: cloudify.nagios.nodes.SNMPTrapReaction
     properties:
       trap_oid: UCD-SNMP-MIB::memAvailReal.0
