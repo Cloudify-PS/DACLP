@@ -1,4 +1,11 @@
 inputs:
+  azure_vm_blueprint_id:
+    type: string
+    default: azure_vm
+
+  message:
+    type: string
+    default: Cloudify Hello World
 
   location:
     type: string
@@ -46,11 +53,6 @@ inputs:
     type: string
     description: >
       Nagios REST password
-
-  free_storage_percentage_threshold:
-    type: integer
-    description: >
-      SNMP configuration for free storage threshold
 
 dsl_definitions:
   client_config: &client_config
@@ -260,7 +262,6 @@ node_templates:
         create:
           implementation: scripts/snmp_install.sh
           inputs:
-            free_storage_percentage_threshold: { get_input: free_storage_percentage_threshold } 
             snmp_user: { get_secret: snmp_user }
             snmp_pass: { get_secret: snmp_pass }
     relationships:

@@ -16,6 +16,7 @@
 - name: install pm2
   npm: name=pm2 global=yes production=yes
 
+
 - name: create app directory
   file: path={{homeDir}}/{{appDir}} state=directory
 
@@ -28,6 +29,13 @@
     recursive: yes
     delete: yes
   notify: "reload pm2"
+
+- name: create index.html
+  template:
+    src: templates/index.j2
+    dest: {{homeDir}}/{{appDir}}/index.html
+  vars:
+    message: "{{message}}"
 
 - name: run npm install
   npm: path={{homeDir}}/{{appDir}}

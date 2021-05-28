@@ -5,6 +5,17 @@ imports:
   - https://cloudify.co/spec/cloudify/5.1.0/types.yaml
 
 inputs:
+  deployment_version:
+    type: string
+
+  use_exisiting_nagios_deployment:
+    type: boolean
+    default: false
+
+  exisiting_nagios_deployment_id:
+    type: string
+    default: {concat: [{get_input: deployment_version}, _nagios]}
+
   app_server_type:
     description: >
       Choose the server type that the application will be hosted on.
@@ -56,12 +67,11 @@ inputs:
     description: >
       idle percentage to trigger scale-out
 
-  free_storage_percentage_threshold:
+  used_storage_percentage_threshold:
     type: integer
-    default: 25
+    default: 50
     description: >
-      Percentage of free storage to trigger storage scale-up.
-      Workflow will be started if the percentage of free space is below the specified value
+      Percentage of used storage to trigger storage scale-up.
 
 node_templates:
   nagios_monitoring:
@@ -74,17 +84,14 @@ node_templates:
         tenant: { get_input: target_resource_tenant }
       resource_config:
         blueprint:
-          external_resource: false
-          id: nagios-bp
-          blueprint_archive: https://github.com/Cloudify-PS/DACLP/archive/refs/heads/day3_dev.zip
-          main_file_name: blueprint-nagios.yaml
+          external_resource: true
+          id: { concat: [{get_input: deployment_version}, _nagios] }
         deployment:
-          id: nagios-deployment
-          auto_inc_suffix: false
           inputs:
             cpu_idle_threshold: { get_input: cpu_idle_threshold }
             location: { get_input: location }
             resource_group: { get_input: resource_group }
+            used_storage_percentage_threshold: { get_input: used_storage_percentage_threshold }
 
   azure_vm:
     type: cloudify.nodes.ServiceComponent
@@ -96,13 +103,9 @@ node_templates:
         tenant: { get_input: target_resource_tenant }
       resource_config:
         blueprint:
-          external_resource: false
-          id: { concat: ['azure-vm-', { get_input: app_server_type }, '-bp'] }
-          blueprint_archive: https://github.com/Cloudify-PS/DACLP/archive/refs/heads/day3_dev.zip
-          main_file_name: { concat: ['blueprint-azure-', { get_input: app_server_type }, '.yaml'] }
+          external_resource: true
+          id: { concat: [{get_input: deployment_version}, _, { get_input: app_server_type }] }
         deployment:
-          id: azure-vm-deployment
-          auto_inc_suffix: false
           inputs:
             location: { get_input: location }
             resource_group: { get_input: resource_group }
@@ -111,7 +114,6 @@ node_templates:
             webserver_vm_os_family: { get_input: webserver_vm_os_family }
             webserver_vm_os_username: { get_input: webserver_vm_os_username }
             deployment_id: azure-vm-deployment
-            free_storage_percentage_threshold: { get_input: free_storage_percentage_threshold }
             nagios_address: { get_attribute: [nagios_monitoring, capabilities, nagios_address] }
             nagios_ssl_certificate: { get_attribute: [nagios_monitoring, capabilities, nagios_ssl_certificate] }
             nagios_user: { get_attribute: [nagios_monitoring, capabilities, nagios_user] }

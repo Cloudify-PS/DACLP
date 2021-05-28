@@ -6,4 +6,5 @@
     - nodejs-self-signed
   vars:
     - homeDir: "{{homeDir}}"
+    - message: "{{message}}"
     - appDir : app

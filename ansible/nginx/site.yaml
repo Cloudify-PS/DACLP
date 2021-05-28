@@ -5,3 +5,4 @@
     - nginx-self-signed
   vars:
     - domain: "{{ domain }}"
+    - message: "{{ message }}"

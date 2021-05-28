@@ -18,6 +18,9 @@ inputs:
   resource_group:
     default: dhl-poc-rg
 
+  used_storage_percentage_threshold:
+    type: integer
+ 
 dsl_definitions:
   client_config: &client_config
     subscription_id: { get_secret: azure_subscription_id }
@@ -64,7 +67,6 @@ node_templates:
         install_method: remote
         user: centos
         key: { get_attribute: [nagios_agent_key, private_key_export] }
-      name: nagios
       location: { get_input: location }
       os_family: linux
       use_public_ip: true
@@ -84,7 +86,6 @@ node_templates:
             runcmd:
               - sysctl -w net.ipv6.conf.all.disable_ipv6=1
               - sysctl -w net.ipv6.conf.default.disable_ipv6=1
-          computerName: { get_property: [SELF, name] }
           adminUsername: centos
           linuxConfiguration:
             ssh:
@@ -150,7 +151,6 @@ node_templates:
   nagios_storage_account:
     type: cloudify.azure.nodes.storage.StorageAccount
     properties:
-      name: nagiossa
       location: { get_input: location }
       resource_config:
         accountType: Standard_LRS

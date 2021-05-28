@@ -24,15 +24,15 @@
     mode: '0644'
   notify: restart nginx
 
-- name: "sync website"
-  synchronize:
-    src: webcontent/
-    dest: /var/www/{{ domain }}
-    archive: no
-    checksum: yes
-    recursive: yes
-    delete: yes
-  become: no
+- name: create app directory
+  file: path=/var/www/{{ domain }} state=directory
+
+- name: create index.html
+  template:
+    src: webcontent/index.j2
+    dest: /var/www/{{ domain }}/index.html
+  vars:
+    message: "{{message}}"
 
 - name: create www directory
   file:
