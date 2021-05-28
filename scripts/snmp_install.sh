@@ -1,4 +1,5 @@
 #!/bin/bash
+target_free=$(awk -v percent="${used_memory_percent}" '/MemTotal/{printf "%d\n", $2 * (1.0-percent);}' < /proc/meminfo)
 sudo ufw disable
 sudo apt-get install -y snmpd
 sudo service snmpd stop
