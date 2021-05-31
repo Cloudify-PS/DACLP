@@ -8,6 +8,7 @@ dontLogTCPWrappersConnects yes
 view CloudifyMonitoringView included .1.3.6.1.4.1.2021
 createUser ${snmp_user} SHA ${snmp_pass} AES ${snmp_pass}
 rouser ${snmp_user} priv -V CloudifyMonitoringView
+disk / ${free_storage_percentage_threshold}
 proc nginx
 proc systemd" | sudo tee /etc/snmp/snmpd.conf
 sudo service snmpd restart
