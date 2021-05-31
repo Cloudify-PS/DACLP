@@ -185,9 +185,6 @@ node_templates:
             network_api_version: { get_input: f5_network_api_version }
             resource_prefix: { get_input: f5_resource_prefix }
             resource_suffix: { get_input: f5_resource_suffix }
-    # relationships:
-    #   - type: cloudify.relationships.depends_on
-    #     target: azure_vm
 
 outputs:
   resource_group:
