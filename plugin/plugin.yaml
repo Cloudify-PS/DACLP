@@ -1,0 +1,15 @@
+plugins:
+  daclp:
+    executor: central_deployment_agent
+    source: plugin
+    package_name: 'cloudify-daclp-plugin'
+    package_version: '1.0'
+
+workflows:
+  call_lifecycle_operations:
+    mapping: daclp.plugin.tasks.call_lifecycle_operations
+    parameters:
+      node_instance_id:
+        type: string
+      operations_with_kwargs:
+        default: []

@@ -76,16 +76,6 @@ node_types:
         start: nagiosrest.nagiosrest_plugin.tasks.add_monitoring
         stop: nagiosrest.nagiosrest_plugin.tasks.remove_monitoring
 
-  cloudify.nodes.MonitorNode:
-    derived_from: cloudify.nodes.Root
-    properties:
-      nagiosrest_monitoring:
-        type: cloudify.datatypes.nagiosrest.Properties
-    interfaces:
-      cloudify.interfaces.monitoring:
-        start: nagiosrest.nagiosrest_plugin.tasks.add_monitoring
-        stop: nagiosrest.nagiosrest_plugin.tasks.remove_monitoring
-
 node_templates:
   resource_group:
     type: cloudify.azure.nodes.ResourceGroup
@@ -167,6 +157,24 @@ node_templates:
         username: { get_input: nagios_user }
         password: { get_input: nagios_password }
         target_type: app_vm_heal_target_type
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        stop: 
+          implementation: rest.cloudify_rest.tasks.execute
+          inputs:
+            template_file: templates/stop_vm.yaml
+            params: &azure_api_params
+              tenant_id: { get_secret: azure_tenant_id } 
+              client_id: { get_secret: azure_client_id }
+              client_secret: { get_secret: azure_client_secret }
+              subscription_id: { get_secret: azure_subscription_id }
+              resource_group: { get_input: resource_group }
+              vm_name: { get_attribute: [SELF, name ] }
+        check_stoppped: 
+          implementation: rest.cloudify_rest.tasks.execute
+          inputs:
+            template_file: templates/check_stopped_vm.yaml
+            params: *azure_api_params
     relationships:
       - type: cloudify.azure.relationships.contained_in_resource_group
         target: resource_group
@@ -174,29 +182,6 @@ node_templates:
         target: nic
       - type: cloudify.azure.relationships.connected_to_storage_account
         target: storage_account
-
-  scale_monitor_node:
-    type: cloudify.nodes.MonitorNode
-    properties:
-      nagiosrest_monitoring:
-        instance_ip_property: ip
-        address: { get_input: nagios_address }
-        certificate: { get_input: nagios_ssl_certificate }
-        username: { get_input: nagios_user }
-        password: { get_input: nagios_password }
-        target_type: cluster_scale_target_type
-    relationships:
-      - type: cloudify.relationships.contained_in
-        target: webserver_vm
-        source_interfaces:
-          cloudify.interfaces.relationship_lifecycle:
-            preconfigure:
-              implementation: scripts/set_runtime_properties.py
-              executor: central_deployment_agent
-              inputs:
-                runtime_properties:
-                  - name: ip
-                    value: { get_attribute: [webserver_vm, ip] }
 
   storage_account:
     type: cloudify.azure.nodes.storage.StorageAccount
@@ -275,7 +260,6 @@ groups:
     members:
       - resource_group
       - webserver_vm
-      - scale_monitor_node
       - storage_account
       - nic
       - ip_config

@@ -9,6 +9,7 @@ imports:
   - plugin:cloudify-ansible-plugin
   - plugin:cloudify-utilities-plugin
   - plugin:cloudify-nagiosrest-plugin
+  - plugin:cloudify-daclp-plugin 
   - blueprint-common.yaml
 
 node_templates:

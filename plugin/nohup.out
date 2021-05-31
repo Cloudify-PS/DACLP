@@ -1,0 +1,515 @@
+Executing workflow `uninstall` on deployment `kfr_v11_day3` [timeout=900 seconds]
+2021-05-31 10:42:49.523  CFY <kfr_v11_day3> Starting 'uninstall' workflow execution
+2021-05-31 10:42:49.787  CFY <kfr_v11_day3> [azure_vm_m5e9jg] Stopping node instance
+2021-05-31 10:42:49.880  CFY <kfr_v11_day3> [azure_vm_m5e9jg] Validating node instance after deletion: nothing to do
+2021-05-31 10:42:50.635  CFY <kfr_v11_day3> [azure_vm_m5e9jg.stop] Sending task 'cloudify_types.component.execute_start'
+2021-05-31 10:42:51.761  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: Starting execution for "azure_vm_m5e9jg" deployment
+2021-05-31 10:42:52.458  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: Execution "7dfc077e-3cb1-4569-951b-3849658e4fe4" of component "azure_vm_m5e9jg" state is {'id': '7dfc077e-3cb1-4569-951b-3849658e4fe4', 'created_at': '2021-05-31T10:42:51.875Z', 'ended_at': None, 'status': 'pending', 'workflow_id': 'uninstall', 'status_display': 'pending'}
+2021-05-31 10:42:52.550  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: Waiting for log messages (execution: 7dfc077e-3cb1-4569-951b-3849658e4fe4)...
+2021-05-31 10:43:02.615  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: Execution "7dfc077e-3cb1-4569-951b-3849658e4fe4" of component "azure_vm_m5e9jg" state is {'id': '7dfc077e-3cb1-4569-951b-3849658e4fe4', 'created_at': '2021-05-31T10:42:51.875Z', 'ended_at': None, 'status': 'started', 'workflow_id': 'uninstall', 'status_display': 'started'}
+2021-05-31 10:43:02.692  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:42:53.193Z Starting 'uninstall' workflow execution
+2021-05-31 10:43:02.692  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:42:54.054Z [run2_0whbcg] Stopping node instance
+2021-05-31 10:43:02.692  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:42:54.199Z [snmp_conf_rimuo5] Stopping node instance
+2021-05-31 10:43:02.692  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:42:54.340Z [agent_key_u37unl] Stopping node instance
+2021-05-31 10:43:02.692  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:42:54.491Z [upgrade_vm_w2pv9h] Stopping node instance
+2021-05-31 10:43:02.692  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:42:54.526Z [run2_0whbcg] Validating node instance after deletion: nothing to do
+2021-05-31 10:43:02.692  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:42:54.564Z [snmp_conf_rimuo5] Validating node instance after deletion: nothing to do
+2021-05-31 10:43:02.692  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:42:54.598Z [agent_key_u37unl] Validating node instance after deletion: nothing to do
+2021-05-31 10:43:02.692  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:42:54.639Z [upgrade_vm_w2pv9h] Validating node instance after deletion: nothing to do
+2021-05-31 10:43:02.692  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:42:54.672Z [run2_0whbcg] Stopped node instance: nothing to do
+2021-05-31 10:43:02.693  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:42:54.708Z [snmp_conf_rimuo5] Stopped node instance: nothing to do
+2021-05-31 10:43:02.693  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:42:54.751Z [agent_key_u37unl] Stopped node instance: nothing to do
+2021-05-31 10:43:02.693  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:42:55.007Z [upgrade_vm_w2pv9h] Stopped node instance: nothing to do
+2021-05-31 10:43:02.693  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:42:55.161Z [run2_0whbcg] Unlinking relationships
+2021-05-31 10:43:02.693  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:42:55.200Z [snmp_conf_rimuo5] Deleting node instance: nothing to do
+2021-05-31 10:43:02.693  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:42:55.448Z [agent_key_u37unl] Deleting node instance
+2021-05-31 10:43:02.693  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:42:55.972Z Sending task 'cloudify_ansible.tasks.cleanup'
+2021-05-31 10:43:02.693  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:42:56.284Z [snmp_conf_rimuo5] Deleted node instance
+2021-05-31 10:43:02.693  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:42:56.945Z [agent_key_u37unl.delete] Sending task 'cloudify_ssh_key.operations.delete'
+2021-05-31 10:43:02.693  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:42:57.804Z [agent_key_u37unl.delete] Skipping delete secrets task because you are using a secret that was not created in this deployment.
+2021-05-31 10:43:02.693  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:42:57.153Z [upgrade_vm_w2pv9h] Deleting node instance: nothing to do
+2021-05-31 10:43:02.693  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:42:57.396Z [upgrade_vm_w2pv9h] Deleted node instance
+2021-05-31 10:43:02.694  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:42:57.534Z [check_4bydmw] Stopping node instance
+2021-05-31 10:43:02.694  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:42:57.592Z Task succeeded 'cloudify_ansible.tasks.cleanup'
+2021-05-31 10:43:02.694  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:42:57.712Z [check_4bydmw] Validating node instance after deletion: nothing to do
+2021-05-31 10:43:02.694  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:42:57.813Z [run2_0whbcg] Relationships unlinked
+2021-05-31 10:43:02.694  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:42:57.846Z [check_4bydmw] Stopped node instance: nothing to do
+2021-05-31 10:43:02.694  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:42:57.914Z [run2_0whbcg] Deleting node instance: nothing to do
+2021-05-31 10:43:02.694  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:42:58.183Z [run2_0whbcg] Deleted node instance
+2021-05-31 10:43:02.694  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:42:58.235Z [check_4bydmw] Deleting node instance: nothing to do
+2021-05-31 10:43:02.694  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:42:58.456Z [check_4bydmw] Deleted node instance
+2021-05-31 10:43:02.694  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:42:58.608Z [agent_key_u37unl.delete] Task succeeded 'cloudify_ssh_key.operations.delete'
+2021-05-31 10:43:02.694  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:42:58.838Z [run_24e31q] Stopping node instance
+2021-05-31 10:43:02.694  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:42:58.974Z [agent_key_u37unl] Deleted node instance
+2021-05-31 10:43:02.694  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:42:59.014Z [run_24e31q] Validating node instance after deletion: nothing to do
+2021-05-31 10:43:02.695  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:42:59.174Z [run_24e31q] Stopped node instance: nothing to do
+2021-05-31 10:43:02.695  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:42:59.476Z [run_24e31q] Unlinking relationships
+2021-05-31 10:43:02.695  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:43:00.268Z Sending task 'cloudify_ansible.tasks.cleanup'
+2021-05-31 10:43:02.695  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:43:01.916Z Task succeeded 'cloudify_ansible.tasks.cleanup'
+2021-05-31 10:43:02.695  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:43:02.127Z [run_24e31q] Relationships unlinked
+2021-05-31 10:43:12.765  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: Execution "7dfc077e-3cb1-4569-951b-3849658e4fe4" of component "azure_vm_m5e9jg" state is {'id': '7dfc077e-3cb1-4569-951b-3849658e4fe4', 'created_at': '2021-05-31T10:42:51.875Z', 'ended_at': None, 'status': 'started', 'workflow_id': 'uninstall', 'status_display': 'started'}
+2021-05-31 10:43:12.842  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:43:02.227Z [run_24e31q] Deleting node instance: nothing to do
+2021-05-31 10:43:12.843  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:43:02.441Z [run_24e31q] Deleted node instance
+2021-05-31 10:43:12.843  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:43:02.812Z [webserver_vm_4ixg2n] Stopping node instance
+2021-05-31 10:43:12.843  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:43:02.908Z [webserver_vm_4ixg2n] Validating node instance after deletion: nothing to do
+2021-05-31 10:43:12.843  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:43:03.663Z [webserver_vm_4ixg2n.stop] Sending task 'nagiosrest_plugin.tasks.remove_monitoring'
+2021-05-31 10:43:22.907  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: Execution "7dfc077e-3cb1-4569-951b-3849658e4fe4" of component "azure_vm_m5e9jg" state is {'id': '7dfc077e-3cb1-4569-951b-3849658e4fe4', 'created_at': '2021-05-31T10:42:51.875Z', 'ended_at': None, 'status': 'started', 'workflow_id': 'uninstall', 'status_display': 'started'}
+2021-05-31 10:43:22.981  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:43:20.544Z [webserver_vm_4ixg2n.stop] Task succeeded 'nagiosrest_plugin.tasks.remove_monitoring'
+2021-05-31 10:43:22.981  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:43:20.759Z [webserver_vm_4ixg2n] Stopping agent
+2021-05-31 10:43:22.981  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:43:21.515Z [webserver_vm_4ixg2n.stop] Sending task 'cloudify_agent.installer.operations.stop'
+2021-05-31 10:43:22.981  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:43:22.566Z [webserver_vm_4ixg2n.stop] Stopping Agent webserver_vm_4ixg2n
+2021-05-31 10:43:33.046  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: Execution "7dfc077e-3cb1-4569-951b-3849658e4fe4" of component "azure_vm_m5e9jg" state is {'id': '7dfc077e-3cb1-4569-951b-3849658e4fe4', 'created_at': '2021-05-31T10:42:51.875Z', 'ended_at': None, 'status': 'started', 'workflow_id': 'uninstall', 'status_display': 'started'}
+2021-05-31 10:43:33.127  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:43:25.244Z [webserver_vm_4ixg2n.stop] Stopping...
+2021-05-31 10:43:33.127  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:43:25.244Z [webserver_vm_4ixg2n.stop] 10:43:25 [INFO ] [cloudify_agent.shell.main] Stopping daemon with command: sudo systemctl stop cloudify-worker-webserver_vm_4ixg2n
+2021-05-31 10:43:33.127  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:43:25.245Z [webserver_vm_4ixg2n.stop] Successfully stopped daemon: webserver_vm_4ixg2n
+2021-05-31 10:43:33.127  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:43:25.969Z [webserver_vm_4ixg2n.stop] Task succeeded 'cloudify_agent.installer.operations.stop'
+2021-05-31 10:43:33.127  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:43:26.045Z [webserver_vm_4ixg2n] Deleting agent
+2021-05-31 10:43:33.127  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:43:26.806Z [webserver_vm_4ixg2n.delete] Sending task 'cloudify_agent.installer.operations.delete'
+2021-05-31 10:43:33.127  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:43:27.851Z [webserver_vm_4ixg2n.delete] Deleting Agent webserver_vm_4ixg2n
+2021-05-31 10:43:43.193  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: Execution "7dfc077e-3cb1-4569-951b-3849658e4fe4" of component "azure_vm_m5e9jg" state is {'id': '7dfc077e-3cb1-4569-951b-3849658e4fe4', 'created_at': '2021-05-31T10:42:51.875Z', 'ended_at': None, 'status': 'started', 'workflow_id': 'uninstall', 'status_display': 'started'}
+2021-05-31 10:43:43.269  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:43:33.686Z [webserver_vm_4ixg2n.delete] Deleting...
+2021-05-31 10:43:43.269  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:43:33.686Z [webserver_vm_4ixg2n.delete] 10:43:33 [INFO] [cloudify.utils.is_agent_alive] No ping response from webserver_vm_4ixg2n: No response received for task c546ad69c8794d97ab21097f1680417e
+2021-05-31 10:43:43.269  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:43:33.686Z [webserver_vm_4ixg2n.delete] Successfully deleted daemon: webserver_vm_4ixg2n
+2021-05-31 10:43:43.269  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:43:34.866Z [webserver_vm_4ixg2n.delete] Task succeeded 'cloudify_agent.installer.operations.delete'
+2021-05-31 10:43:43.269  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:43:34.954Z [webserver_vm_4ixg2n] Agent deleted
+2021-05-31 10:43:43.269  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:43:35.055Z [webserver_vm_4ixg2n] Stopped node instance: nothing to do
+2021-05-31 10:43:43.269  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:43:35.463Z [webserver_vm_4ixg2n] Deleting node instance
+2021-05-31 10:43:43.269  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:43:36.233Z [webserver_vm_4ixg2n.delete] Sending task 'cloudify_azure.resources.compute.virtualmachine.delete'
+2021-05-31 10:43:43.269  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:43:37.425Z [webserver_vm_4ixg2n.delete] Get virtual_machine...f7ee78cf-32a0-4172-81f3-7f55e9fae38c
+2021-05-31 10:43:43.270  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:43:37.547Z [webserver_vm_4ixg2n.delete] Get virtual_machine result: id : /subscriptions/937eb75f-e9d8-40e7-b7b7-ff1bd75f3d88/resourceGroups/dhl-poc-rg/providers/Microsoft.Compute/virtualMachines/f7ee78cf-32a0-4172-81f3-7f55e9fae38c
+name : f7ee78cf-32a0-4172-81f3-7f55e9fae38c
+type : Microsoft.Compute/virtualMachines
+location : westeurope
+hardware_profile : 
+  vm_size : Standard_A1_v2
+storage_profile : 
+  image_reference : 
+    publisher : Canonical
+    offer : UbuntuServer
+    sku : 18.04-LTS
+    version : latest
+  os_disk : 
+    os_type : Linux
+    name : f7ee78cf-32a0-4172-81f3-7f55e9fae38c
+    vhd : 
+      uri : http://m6zuynjd490xlx57qo4d1.blob.core.windows.net/vhds/f7ee78cf-32a0-4172-81f3-7f55e9fae38c.vhd
+    caching : ReadWrite
+    create_option : FromImage
+    disk_size_gb : 30
+  data_disks : []
+os_profile : 
+  computer_name : f7ee78cf-32a0-4172-81f3-7f55e9fae38c
+  admin_username : azureuser
+  linux_configuration : 
+    disable_password_authentication : True
+    ssh : 
+      public_keys : [{'path': '/home/azureuser/.ssh/authorized_keys', 'key_data': 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDPgS/Y+js4aRz6Yhjs8Z5FL83qspi2cKJdgjEcbSs+BKQG5O+Lj7GRh5tB2k7m80BarAwFLvXcXPOHJfavpwGOjTXO3XBPeLTUESnGk4FrYNmuZuE+0UIK4L/XW+7o8oMGdczWJwVwKX4KUNsxNw/CkPFe5gBsOrXw10XHHruRCe/G5PPSKwo8PRQcKJsHvD7AawpPl5p6BQ5j2niOZqxWwAC34wmiTjIgVdEy0D+un2S+s6I5ElY9sN1cg1SP0idqTWmFkgn0RfKhGzS3sXILMUNFSWmWzxds5jhDeMQNs44ZlR+vB5Nr6W+lVLudsnMLJ4E9wwFR2toSv6VUxvM9'}]
+  secrets : []
+network_profile : 
+  network_interfaces : [{'id': '/subscriptions/937eb75f-e9d8-40e7-b7b7-ff1bd75f3d88/resourceGroups/dhl-poc-rg/providers/Microsoft.Network/networkInterfaces/919cb0f6-0cc8-4ae8-8f63-92c5c38650ae', 'primary': False}]
+provisioning_state : Succeeded
+vm_id : c1790618-4399-47aa-bfa9-49487e5c7ac6
+
+2021-05-31 10:43:43.270  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:43:37.547Z [webserver_vm_4ixg2n.delete] Deleting virtual_machine...f7ee78cf-32a0-4172-81f3-7f55e9fae38c
+2021-05-31 10:43:53.337  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: Execution "7dfc077e-3cb1-4569-951b-3849658e4fe4" of component "azure_vm_m5e9jg" state is {'id': '7dfc077e-3cb1-4569-951b-3849658e4fe4', 'created_at': '2021-05-31T10:42:51.875Z', 'ended_at': None, 'status': 'started', 'workflow_id': 'uninstall', 'status_display': 'started'}
+2021-05-31 10:43:53.411  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: Waiting for log messages (execution: 7dfc077e-3cb1-4569-951b-3849658e4fe4)...
+2021-05-31 10:44:03.474  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: Execution "7dfc077e-3cb1-4569-951b-3849658e4fe4" of component "azure_vm_m5e9jg" state is {'id': '7dfc077e-3cb1-4569-951b-3849658e4fe4', 'created_at': '2021-05-31T10:42:51.875Z', 'ended_at': None, 'status': 'started', 'workflow_id': 'uninstall', 'status_display': 'started'}
+2021-05-31 10:44:03.546  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: Waiting for log messages (execution: 7dfc077e-3cb1-4569-951b-3849658e4fe4)...
+2021-05-31 10:44:13.611  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: Execution "7dfc077e-3cb1-4569-951b-3849658e4fe4" of component "azure_vm_m5e9jg" state is {'id': '7dfc077e-3cb1-4569-951b-3849658e4fe4', 'created_at': '2021-05-31T10:42:51.875Z', 'ended_at': None, 'status': 'started', 'workflow_id': 'uninstall', 'status_display': 'started'}
+2021-05-31 10:44:13.684  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: Waiting for log messages (execution: 7dfc077e-3cb1-4569-951b-3849658e4fe4)...
+2021-05-31 10:44:23.753  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: Execution "7dfc077e-3cb1-4569-951b-3849658e4fe4" of component "azure_vm_m5e9jg" state is {'id': '7dfc077e-3cb1-4569-951b-3849658e4fe4', 'created_at': '2021-05-31T10:42:51.875Z', 'ended_at': None, 'status': 'started', 'workflow_id': 'uninstall', 'status_display': 'started'}
+2021-05-31 10:44:23.828  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:44:18.663Z [webserver_vm_4ixg2n.delete] Task succeeded 'cloudify_azure.resources.compute.virtualmachine.delete'
+2021-05-31 10:44:23.828  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:44:18.844Z [webserver_vm_4ixg2n] Deleted node instance
+2021-05-31 10:44:23.828  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:44:19.224Z [storage_account_aer18t] Stopping node instance
+2021-05-31 10:44:23.828  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:44:19.371Z [nic_j5y23p] Stopping node instance
+2021-05-31 10:44:23.828  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:44:19.411Z [storage_account_aer18t] Validating node instance after deletion: nothing to do
+2021-05-31 10:44:23.828  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:44:19.459Z [storage_account_aer18t] Stopped node instance: nothing to do
+2021-05-31 10:44:23.828  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:44:19.496Z [nic_j5y23p] Validating node instance after deletion: nothing to do
+2021-05-31 10:44:23.828  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:44:19.662Z [nic_j5y23p] Stopped node instance: nothing to do
+2021-05-31 10:44:23.829  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:44:19.869Z [storage_account_aer18t] Deleting node instance
+2021-05-31 10:44:23.829  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:44:20.619Z [storage_account_aer18t.delete] Sending task 'cloudify_azure.resources.storage.storageaccount.delete'
+2021-05-31 10:44:23.829  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:44:21.029Z [nic_j5y23p] Deleting node instance
+2021-05-31 10:44:23.829  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:44:21.704Z [storage_account_aer18t.delete] Get Storage Account...m6zuynjd490xlx57qo4d1
+2021-05-31 10:44:23.829  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:44:21.784Z [nic_j5y23p.delete] Sending task 'cloudify_azure.resources.network.networkinterfacecard.delete'
+2021-05-31 10:44:23.829  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:44:21.856Z [storage_account_aer18t.delete] Get storage_account result: id : /subscriptions/937eb75f-e9d8-40e7-b7b7-ff1bd75f3d88/resourceGroups/dhl-poc-rg/providers/Microsoft.Storage/storageAccounts/m6zuynjd490xlx57qo4d1
+name : m6zuynjd490xlx57qo4d1
+type : Microsoft.Storage/storageAccounts
+location : westeurope
+tags : 
+  provisioning_state : Succeeded
+account_type : Standard_LRS
+primary_endpoints : 
+  blob : https://m6zuynjd490xlx57qo4d1.blob.core.windows.net/
+  queue : https://m6zuynjd490xlx57qo4d1.queue.core.windows.net/
+  table : https://m6zuynjd490xlx57qo4d1.table.core.windows.net/
+  file : https://m6zuynjd490xlx57qo4d1.file.core.windows.net/
+primary_location : westeurope
+status_of_primary : Available
+creation_time : 2021-05-31T10:16:33.18965Z
+
+2021-05-31 10:44:23.829  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:44:21.856Z [storage_account_aer18t.delete] Deleting Storage Account...m6zuynjd490xlx57qo4d1
+2021-05-31 10:44:23.829  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:44:22.909Z [nic_j5y23p.delete] Get network_interface...919cb0f6-0cc8-4ae8-8f63-92c5c38650ae
+2021-05-31 10:44:23.829  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:44:23.636Z [storage_account_aer18t.delete] Task succeeded 'cloudify_azure.resources.storage.storageaccount.delete'
+2021-05-31 10:44:23.829  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:44:23.034Z [nic_j5y23p.delete] Get network_interface result: id : /subscriptions/937eb75f-e9d8-40e7-b7b7-ff1bd75f3d88/resourceGroups/dhl-poc-rg/providers/Microsoft.Network/networkInterfaces/919cb0f6-0cc8-4ae8-8f63-92c5c38650ae
+name : 919cb0f6-0cc8-4ae8-8f63-92c5c38650ae
+type : Microsoft.Network/networkInterfaces
+location : westeurope
+ip_configurations : [{'id': '/subscriptions/937eb75f-e9d8-40e7-b7b7-ff1bd75f3d88/resourceGroups/dhl-poc-rg/providers/Microsoft.Network/networkInterfaces/919cb0f6-0cc8-4ae8-8f63-92c5c38650ae/ipConfigurations/77f7c60e-22d3-44a3-9041-b08258008f51', 'private_ip_address': '10.2.0.11', 'private_ip_allocation_method': 'Dynamic', 'private_ip_address_version': 'IPv4', 'subnet': {'id': '/subscriptions/937eb75f-e9d8-40e7-b7b7-ff1bd75f3d88/resourceGroups/dhl-poc-rg/providers/Microsoft.Network/virtualNetworks/dhl-poc-rg-vnet/subnets/default'}, 'primary': True, 'public_ip_address': {'id': '/subscriptions/937eb75f-e9d8-40e7-b7b7-ff1bd75f3d88/resourceGroups/dhl-poc-rg/providers/Microsoft.Network/publicIPAddresses/2ce6deb2-450a-4a95-a575-fbd0670f4ec0'}, 'provisioning_state': 'Succeeded', 'name': '77f7c60e-22d3-44a3-9041-b08258008f51', 'etag': 'W/"939c2cdb-13e2-4b28-bfcf-6f56916b58b7"'}]
+dns_settings : 
+  dns_servers : []
+  applied_dns_servers : []
+mac_address : 00-0D-3A-A8-5C-3E
+enable_accelerated_networking : False
+enable_ip_forwarding : False
+resource_guid : f1a371f2-ff16-40c0-ad90-d5da8162b2bc
+provisioning_state : Succeeded
+etag : W/"939c2cdb-13e2-4b28-bfcf-6f56916b58b7"
+
+2021-05-31 10:44:23.829  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:44:23.034Z [nic_j5y23p.delete] Deleting network_interface...919cb0f6-0cc8-4ae8-8f63-92c5c38650ae
+2021-05-31 10:44:33.886  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: Execution "7dfc077e-3cb1-4569-951b-3849658e4fe4" of component "azure_vm_m5e9jg" state is {'id': '7dfc077e-3cb1-4569-951b-3849658e4fe4', 'created_at': '2021-05-31T10:42:51.875Z', 'ended_at': None, 'status': 'started', 'workflow_id': 'uninstall', 'status_display': 'started'}
+2021-05-31 10:44:33.961  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:44:23.817Z [storage_account_aer18t] Deleted node instance
+2021-05-31 10:44:44.028  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: Execution "7dfc077e-3cb1-4569-951b-3849658e4fe4" of component "azure_vm_m5e9jg" state is {'id': '7dfc077e-3cb1-4569-951b-3849658e4fe4', 'created_at': '2021-05-31T10:42:51.875Z', 'ended_at': None, 'status': 'started', 'workflow_id': 'uninstall', 'status_display': 'started'}
+2021-05-31 10:44:44.110  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:44:34.035Z [nic_j5y23p.delete] Task succeeded 'cloudify_azure.resources.network.networkinterfacecard.delete'
+2021-05-31 10:44:44.110  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:44:34.197Z [nic_j5y23p] Deleted node instance
+2021-05-31 10:44:44.110  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:44:34.590Z [ip_config_0ojeqr] Stopping node instance
+2021-05-31 10:44:44.110  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:44:34.687Z [ip_config_0ojeqr] Validating node instance after deletion: nothing to do
+2021-05-31 10:44:44.110  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:44:34.788Z [ip_config_0ojeqr] Stopped node instance: nothing to do
+2021-05-31 10:44:44.111  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:44:35.089Z [ip_config_0ojeqr] Deleting node instance: nothing to do
+2021-05-31 10:44:44.111  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:44:35.291Z [ip_config_0ojeqr] Deleted node instance
+2021-05-31 10:44:44.111  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:44:35.676Z [public_ip_o17kum] Stopping node instance
+2021-05-31 10:44:44.111  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:44:35.819Z [subnet_tbw79s] Stopping node instance
+2021-05-31 10:44:44.111  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:44:35.852Z [public_ip_o17kum] Validating node instance after deletion: nothing to do
+2021-05-31 10:44:44.111  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:44:35.907Z [public_ip_o17kum] Stopped node instance: nothing to do
+2021-05-31 10:44:44.111  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:44:35.945Z [subnet_tbw79s] Validating node instance after deletion: nothing to do
+2021-05-31 10:44:44.111  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:44:36.111Z [subnet_tbw79s] Stopped node instance: nothing to do
+2021-05-31 10:44:44.111  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:44:36.311Z [public_ip_o17kum] Deleting node instance
+2021-05-31 10:44:44.111  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:44:37.077Z [public_ip_o17kum.delete] Sending task 'cloudify_azure.resources.network.publicipaddress.delete'
+2021-05-31 10:44:44.111  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:44:37.505Z [subnet_tbw79s] Deleting node instance
+2021-05-31 10:44:44.112  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:44:38.246Z [subnet_tbw79s.delete] Sending task 'cloudify_azure.resources.network.subnet.delete'
+2021-05-31 10:44:44.112  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:44:38.273Z [public_ip_o17kum.delete] Get public_ip_address...2ce6deb2-450a-4a95-a575-fbd0670f4ec0
+2021-05-31 10:44:44.112  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:44:38.410Z [public_ip_o17kum.delete] Get public_ip_address result: id : /subscriptions/937eb75f-e9d8-40e7-b7b7-ff1bd75f3d88/resourceGroups/dhl-poc-rg/providers/Microsoft.Network/publicIPAddresses/2ce6deb2-450a-4a95-a575-fbd0670f4ec0
+name : 2ce6deb2-450a-4a95-a575-fbd0670f4ec0
+type : Microsoft.Network/publicIPAddresses
+location : westeurope
+public_ip_allocation_method : Static
+public_ip_address_version : IPv4
+ip_address : 20.86.101.101
+idle_timeout_in_minutes : 4
+resource_guid : fd5f79ac-1eac-4dce-a395-e8634e99b334
+provisioning_state : Succeeded
+etag : W/"0c709275-da8e-4bae-9bc1-a7af373aa4f5"
+
+2021-05-31 10:44:44.112  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:44:38.410Z [public_ip_o17kum.delete] Deleting public_ip_address...2ce6deb2-450a-4a95-a575-fbd0670f4ec0
+2021-05-31 10:44:44.112  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:44:39.691Z [subnet_tbw79s.delete] Task succeeded 'cloudify_azure.resources.network.subnet.delete'
+2021-05-31 10:44:44.112  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:44:39.882Z [subnet_tbw79s] Deleted node instance
+2021-05-31 10:44:44.112  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:44:40.236Z [network_xyp702] Stopping node instance
+2021-05-31 10:44:44.112  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:44:40.335Z [network_xyp702] Validating node instance after deletion: nothing to do
+2021-05-31 10:44:44.112  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:44:40.436Z [network_xyp702] Stopped node instance: nothing to do
+2021-05-31 10:44:44.112  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:44:40.843Z [network_xyp702] Deleting node instance
+2021-05-31 10:44:44.113  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:44:41.594Z [network_xyp702.delete] Sending task 'cloudify_azure.resources.network.virtualnetwork.delete'
+2021-05-31 10:44:44.113  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:44:43.039Z [network_xyp702.delete] Task succeeded 'cloudify_azure.resources.network.virtualnetwork.delete'
+2021-05-31 10:44:44.113  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:44:43.219Z [network_xyp702] Deleted node instance
+2021-05-31 10:44:54.176  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: Execution "7dfc077e-3cb1-4569-951b-3849658e4fe4" of component "azure_vm_m5e9jg" state is {'id': '7dfc077e-3cb1-4569-951b-3849658e4fe4', 'created_at': '2021-05-31T10:42:51.875Z', 'ended_at': None, 'status': 'started', 'workflow_id': 'uninstall', 'status_display': 'started'}
+2021-05-31 10:44:54.251  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: Waiting for log messages (execution: 7dfc077e-3cb1-4569-951b-3849658e4fe4)...
+2021-05-31 10:45:04.315  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: Execution "7dfc077e-3cb1-4569-951b-3849658e4fe4" of component "azure_vm_m5e9jg" state is {'id': '7dfc077e-3cb1-4569-951b-3849658e4fe4', 'created_at': '2021-05-31T10:42:51.875Z', 'ended_at': '2021-05-31T10:45:03.509Z', 'status': 'terminated', 'workflow_id': 'uninstall', 'status_display': 'terminated'}
+2021-05-31 10:45:04.391  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:44:59.691Z [public_ip_o17kum.delete] Task succeeded 'cloudify_azure.resources.network.publicipaddress.delete'
+2021-05-31 10:45:04.391  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:44:59.906Z [public_ip_o17kum] Deleted node instance
+2021-05-31 10:45:04.392  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:45:00.289Z [resource_group_rfasfd] Stopping node instance
+2021-05-31 10:45:04.392  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:45:00.367Z [resource_group_rfasfd] Validating node instance after deletion: nothing to do
+2021-05-31 10:45:04.392  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:45:00.467Z [resource_group_rfasfd] Stopped node instance: nothing to do
+2021-05-31 10:45:04.392  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:45:00.880Z [resource_group_rfasfd] Deleting node instance
+2021-05-31 10:45:04.392  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:45:01.631Z [resource_group_rfasfd.delete] Sending task 'cloudify_azure.resources.resourcegroup.delete'
+2021-05-31 10:45:04.392  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:45:03.084Z [resource_group_rfasfd.delete] Task succeeded 'cloudify_azure.resources.resourcegroup.delete'
+2021-05-31 10:45:04.392  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:45:03.248Z [resource_group_rfasfd] Deleted node instance
+2021-05-31 10:45:04.392  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: 2021-05-31T10:45:03.540Z 'uninstall' workflow execution succeeded
+2021-05-31 10:45:04.392  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: Execution succeeded for "azure_vm_m5e9jg" deployment
+2021-05-31 10:45:04.392  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: Fetching "azure_vm_m5e9jg" deployment capabilities..
+2021-05-31 10:45:04.480  LOG <kfr_v11_day3> [azure_vm_m5e9jg.stop] INFO: Fetched capabilities:
+{
+ "resource_group": "dhl-poc-rg",
+ "location": "westeurope",
+ "webserver_vm_public_ip": null,
+ "webserver_vm_private_ip": null
+}
+2021-05-31 10:45:05.343  CFY <kfr_v11_day3> [azure_vm_m5e9jg.stop] Task succeeded 'cloudify_types.component.execute_start (True)'
+2021-05-31 10:45:05.419  CFY <kfr_v11_day3> [azure_vm_m5e9jg] Stopped node instance
+2021-05-31 10:45:05.828  CFY <kfr_v11_day3> [azure_vm_m5e9jg] Deleting node instance
+2021-05-31 10:45:06.583  CFY <kfr_v11_day3> [azure_vm_m5e9jg.delete] Sending task 'cloudify_types.component.delete'
+2021-05-31 10:45:07.517  LOG <kfr_v11_day3> [azure_vm_m5e9jg.delete] INFO: Wait for component's stop deployment operation related executions.
+2021-05-31 10:45:07.658  LOG <kfr_v11_day3> [azure_vm_m5e9jg.delete] INFO: Delete component's "azure_vm_m5e9jg" deployment
+2021-05-31 10:45:08.787  LOG <kfr_v11_day3> [azure_vm_m5e9jg.delete] INFO: Waiting for component's deployment delete.
+2021-05-31 10:45:29.045  LOG <kfr_v11_day3> [azure_vm_m5e9jg.delete] INFO: Removing inter-deployment dependency between this deployment ("azure_vm_m5e9jg") and "kfr_v11_day3" the Component's creator deployment...
+2021-05-31 10:45:29.907  CFY <kfr_v11_day3> [azure_vm_m5e9jg.delete] Task succeeded 'cloudify_types.component.delete (True)'
+2021-05-31 10:45:30.052  CFY <kfr_v11_day3> [azure_vm_m5e9jg] Deleted node instance
+2021-05-31 10:45:30.445  CFY <kfr_v11_day3> [nagios_monitoring_1ejv65] Stopping node instance
+2021-05-31 10:45:30.528  CFY <kfr_v11_day3> [nagios_monitoring_1ejv65] Validating node instance after deletion: nothing to do
+2021-05-31 10:45:31.286  CFY <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] Sending task 'cloudify_types.component.execute_start'
+2021-05-31 10:45:32.352  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: Starting execution for "nagios_monitoring_1ejv65" deployment
+2021-05-31 10:45:33.031  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: Execution "c45a1eeb-9ce6-4dfa-8716-b292e0a4a02b" of component "nagios_monitoring_1ejv65" state is {'id': 'c45a1eeb-9ce6-4dfa-8716-b292e0a4a02b', 'created_at': '2021-05-31T10:45:32.459Z', 'ended_at': None, 'status': 'pending', 'workflow_id': 'uninstall', 'status_display': 'pending'}
+2021-05-31 10:45:33.105  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: Waiting for log messages (execution: c45a1eeb-9ce6-4dfa-8716-b292e0a4a02b)...
+2021-05-31 10:45:43.172  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: Execution "c45a1eeb-9ce6-4dfa-8716-b292e0a4a02b" of component "nagios_monitoring_1ejv65" state is {'id': 'c45a1eeb-9ce6-4dfa-8716-b292e0a4a02b', 'created_at': '2021-05-31T10:45:32.459Z', 'ended_at': None, 'status': 'started', 'workflow_id': 'uninstall', 'status_display': 'started'}
+2021-05-31 10:45:43.248  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:45:33.740Z Starting 'uninstall' workflow execution
+2021-05-31 10:45:43.248  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:45:34.451Z [nagios_agent_key_u0ggt3] Stopping node instance
+2021-05-31 10:45:43.249  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:45:34.604Z [app_vm_heal_target_type_uxd63x] Stopping node instance
+2021-05-31 10:45:43.249  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:45:34.637Z [nagios_agent_key_u0ggt3] Validating node instance after deletion: nothing to do
+2021-05-31 10:45:43.249  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:45:34.691Z [nagios_agent_key_u0ggt3] Stopped node instance: nothing to do
+2021-05-31 10:45:43.249  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:45:34.738Z [app_vm_heal_target_type_uxd63x] Validating node instance after deletion: nothing to do
+2021-05-31 10:45:43.249  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:45:34.899Z [app_vm_heal_target_type_uxd63x] Stopped node instance: nothing to do
+2021-05-31 10:45:43.249  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:45:35.098Z [nagios_agent_key_u0ggt3] Deleting node instance
+2021-05-31 10:45:43.249  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:45:35.859Z [nagios_agent_key_u0ggt3.delete] Sending task 'cloudify_ssh_key.operations.delete'
+2021-05-31 10:45:43.249  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:45:36.285Z [app_vm_heal_target_type_uxd63x] Deleting node instance
+2021-05-31 10:45:43.249  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:45:37.136Z [app_vm_heal_target_type_uxd63x.delete] Sending task 'managed_nagios_plugin.target_type.tasks.delete'
+2021-05-31 10:45:43.249  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:45:41.855Z [app_vm_heal_target_type_uxd63x.delete] Removing associated checks
+2021-05-31 10:45:43.249  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:45:41.991Z [app_vm_heal_target_type_uxd63x.delete] Removing associated targets
+2021-05-31 10:45:43.249  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:45:42.346Z [app_vm_heal_target_type_uxd63x.delete] Removing tenant target types
+2021-05-31 10:45:43.250  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:45:42.607Z [nagios_agent_key_u0ggt3.delete] Task succeeded 'cloudify_ssh_key.operations.delete'
+2021-05-31 10:45:43.250  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:45:42.801Z [nagios_agent_key_u0ggt3] Deleted node instance
+2021-05-31 10:45:43.250  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:45:42.346Z [app_vm_heal_target_type_uxd63x.delete] Removing target type template
+2021-05-31 10:45:43.250  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:45:42.719Z [app_vm_heal_target_type_uxd63x.delete] Removing target type
+2021-05-31 10:45:53.310  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: Execution "c45a1eeb-9ce6-4dfa-8716-b292e0a4a02b" of component "nagios_monitoring_1ejv65" state is {'id': 'c45a1eeb-9ce6-4dfa-8716-b292e0a4a02b', 'created_at': '2021-05-31T10:45:32.459Z', 'ended_at': None, 'status': 'started', 'workflow_id': 'uninstall', 'status_display': 'started'}
+2021-05-31 10:45:53.386  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: Waiting for log messages (execution: c45a1eeb-9ce6-4dfa-8716-b292e0a4a02b)...
+2021-05-31 10:46:03.458  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: Execution "c45a1eeb-9ce6-4dfa-8716-b292e0a4a02b" of component "nagios_monitoring_1ejv65" state is {'id': 'c45a1eeb-9ce6-4dfa-8716-b292e0a4a02b', 'created_at': '2021-05-31T10:45:32.459Z', 'ended_at': None, 'status': 'started', 'workflow_id': 'uninstall', 'status_display': 'started'}
+2021-05-31 10:46:03.534  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:45:59.271Z [app_vm_heal_target_type_uxd63x.delete] Task succeeded 'managed_nagios_plugin.target_type.tasks.delete'
+2021-05-31 10:46:03.534  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:45:59.434Z [app_vm_heal_target_type_uxd63x] Deleted node instance
+2021-05-31 10:46:03.534  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:45:59.810Z [cpu_load_check_ny1yrp] Stopping node instance
+2021-05-31 10:46:03.534  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:45:59.975Z [reachability_check_xxmtp7] Stopping node instance
+2021-05-31 10:46:03.534  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:46:00.121Z [storage_check_6jwhm7] Stopping node instance
+2021-05-31 10:46:03.534  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:46:00.158Z [cpu_load_check_ny1yrp] Validating node instance after deletion: nothing to do
+2021-05-31 10:46:03.534  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:46:00.195Z [reachability_check_xxmtp7] Validating node instance after deletion: nothing to do
+2021-05-31 10:46:03.534  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:46:00.230Z [storage_check_6jwhm7] Validating node instance after deletion: nothing to do
+2021-05-31 10:46:03.535  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:46:00.279Z [cpu_load_check_ny1yrp] Stopped node instance: nothing to do
+2021-05-31 10:46:03.535  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:46:00.317Z [reachability_check_xxmtp7] Stopped node instance: nothing to do
+2021-05-31 10:46:03.535  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:46:00.353Z [storage_check_6jwhm7] Stopped node instance: nothing to do
+2021-05-31 10:46:03.535  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:46:00.712Z [cpu_load_check_ny1yrp] Deleting node instance: nothing to do
+2021-05-31 10:46:03.535  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:46:00.748Z [reachability_check_xxmtp7] Deleting node instance: nothing to do
+2021-05-31 10:46:03.535  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:46:00.890Z [cpu_load_check_ny1yrp] Deleted node instance
+2021-05-31 10:46:03.535  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:46:00.927Z [storage_check_6jwhm7] Deleting node instance: nothing to do
+2021-05-31 10:46:03.535  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:46:01.066Z [reachability_check_xxmtp7] Deleted node instance
+2021-05-31 10:46:03.535  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:46:01.207Z [storage_check_6jwhm7] Deleted node instance
+2021-05-31 10:46:13.597  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: Execution "c45a1eeb-9ce6-4dfa-8716-b292e0a4a02b" of component "nagios_monitoring_1ejv65" state is {'id': 'c45a1eeb-9ce6-4dfa-8716-b292e0a4a02b', 'created_at': '2021-05-31T10:45:32.459Z', 'ended_at': None, 'status': 'started', 'workflow_id': 'uninstall', 'status_display': 'started'}
+2021-05-31 10:46:13.670  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:46:01.551Z [nagios_yzkf3z] Stopping node instance
+2021-05-31 10:46:13.670  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:46:01.642Z [nagios_yzkf3z] Validating node instance after deletion: nothing to do
+2021-05-31 10:46:13.670  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:46:01.743Z [nagios_yzkf3z] Stopped node instance: nothing to do
+2021-05-31 10:46:13.670  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:46:02.153Z [nagios_yzkf3z] Deleting node instance
+2021-05-31 10:46:13.670  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:46:02.991Z [nagios_yzkf3z.delete] Sending task 'managed_nagios_plugin.nagios.tasks.delete'
+2021-05-31 10:46:13.670  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:46:05.166Z [nagios_yzkf3z.delete] Uninstalling nagios and web server packages
+2021-05-31 10:46:23.733  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: Execution "c45a1eeb-9ce6-4dfa-8716-b292e0a4a02b" of component "nagios_monitoring_1ejv65" state is {'id': 'c45a1eeb-9ce6-4dfa-8716-b292e0a4a02b', 'created_at': '2021-05-31T10:45:32.459Z', 'ended_at': None, 'status': 'started', 'workflow_id': 'uninstall', 'status_display': 'started'}
+2021-05-31 10:46:23.808  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: Waiting for log messages (execution: c45a1eeb-9ce6-4dfa-8716-b292e0a4a02b)...
+2021-05-31 10:46:33.864  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: Execution "c45a1eeb-9ce6-4dfa-8716-b292e0a4a02b" of component "nagios_monitoring_1ejv65" state is {'id': 'c45a1eeb-9ce6-4dfa-8716-b292e0a4a02b', 'created_at': '2021-05-31T10:45:32.459Z', 'ended_at': None, 'status': 'started', 'workflow_id': 'uninstall', 'status_display': 'started'}
+2021-05-31 10:46:33.938  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: Waiting for log messages (execution: c45a1eeb-9ce6-4dfa-8716-b292e0a4a02b)...
+2021-05-31 10:46:44.004  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: Execution "c45a1eeb-9ce6-4dfa-8716-b292e0a4a02b" of component "nagios_monitoring_1ejv65" state is {'id': 'c45a1eeb-9ce6-4dfa-8716-b292e0a4a02b', 'created_at': '2021-05-31T10:45:32.459Z', 'ended_at': None, 'status': 'started', 'workflow_id': 'uninstall', 'status_display': 'started'}
+2021-05-31 10:46:44.083  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: Waiting for log messages (execution: c45a1eeb-9ce6-4dfa-8716-b292e0a4a02b)...
+2021-05-31 10:46:54.148  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: Execution "c45a1eeb-9ce6-4dfa-8716-b292e0a4a02b" of component "nagios_monitoring_1ejv65" state is {'id': 'c45a1eeb-9ce6-4dfa-8716-b292e0a4a02b', 'created_at': '2021-05-31T10:45:32.459Z', 'ended_at': None, 'status': 'started', 'workflow_id': 'uninstall', 'status_display': 'started'}
+2021-05-31 10:46:54.227  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: Waiting for log messages (execution: c45a1eeb-9ce6-4dfa-8716-b292e0a4a02b)...
+2021-05-31 10:47:04.289  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: Execution "c45a1eeb-9ce6-4dfa-8716-b292e0a4a02b" of component "nagios_monitoring_1ejv65" state is {'id': 'c45a1eeb-9ce6-4dfa-8716-b292e0a4a02b', 'created_at': '2021-05-31T10:45:32.459Z', 'ended_at': None, 'status': 'started', 'workflow_id': 'uninstall', 'status_display': 'started'}
+2021-05-31 10:47:04.367  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: Waiting for log messages (execution: c45a1eeb-9ce6-4dfa-8716-b292e0a4a02b)...
+2021-05-31 10:47:14.435  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: Execution "c45a1eeb-9ce6-4dfa-8716-b292e0a4a02b" of component "nagios_monitoring_1ejv65" state is {'id': 'c45a1eeb-9ce6-4dfa-8716-b292e0a4a02b', 'created_at': '2021-05-31T10:45:32.459Z', 'ended_at': None, 'status': 'started', 'workflow_id': 'uninstall', 'status_display': 'started'}
+2021-05-31 10:47:14.507  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:47:05.412Z [nagios_yzkf3z.delete] Removing nagiosrest
+2021-05-31 10:47:14.507  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:47:06.451Z [nagios_yzkf3z.delete] Removing leftover data, configuration, and scripts
+2021-05-31 10:47:14.507  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:47:07.944Z [nagios_yzkf3z.delete] Task succeeded 'managed_nagios_plugin.nagios.tasks.delete'
+2021-05-31 10:47:14.507  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:47:08.084Z [nagios_yzkf3z] Deleted node instance
+2021-05-31 10:47:14.507  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:47:08.452Z [disable_ipv6_zqaplp] Stopping node instance
+2021-05-31 10:47:14.507  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:47:08.554Z [disable_ipv6_zqaplp] Validating node instance after deletion: nothing to do
+2021-05-31 10:47:14.507  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:47:08.655Z [disable_ipv6_zqaplp] Stopped node instance: nothing to do
+2021-05-31 10:47:14.508  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:47:08.957Z [disable_ipv6_zqaplp] Deleting node instance: nothing to do
+2021-05-31 10:47:14.508  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:47:09.165Z [disable_ipv6_zqaplp] Deleted node instance
+2021-05-31 10:47:14.508  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:47:09.543Z [nagios_vm_y3b1j9] Stopping node instance
+2021-05-31 10:47:14.508  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:47:09.639Z [nagios_vm_y3b1j9] Validating node instance after deletion: nothing to do
+2021-05-31 10:47:14.508  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:47:09.941Z [nagios_vm_y3b1j9] Stopping agent
+2021-05-31 10:47:14.508  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:47:10.699Z [nagios_vm_y3b1j9.stop] Sending task 'cloudify_agent.installer.operations.stop'
+2021-05-31 10:47:14.508  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:47:11.703Z [nagios_vm_y3b1j9.stop] Stopping Agent nagios_vm_y3b1j9
+2021-05-31 10:47:14.508  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:47:13.493Z [nagios_vm_y3b1j9.stop] Stopping...
+2021-05-31 10:47:14.508  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:47:13.493Z [nagios_vm_y3b1j9.stop] 10:47:13 [INFO ] [cloudify_agent.shell.main] Stopping daemon with command: sudo systemctl stop cloudify-worker-nagios_vm_y3b1j9
+2021-05-31 10:47:14.508  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:47:13.493Z [nagios_vm_y3b1j9.stop] Successfully stopped daemon: nagios_vm_y3b1j9
+2021-05-31 10:47:24.568  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: Execution "c45a1eeb-9ce6-4dfa-8716-b292e0a4a02b" of component "nagios_monitoring_1ejv65" state is {'id': 'c45a1eeb-9ce6-4dfa-8716-b292e0a4a02b', 'created_at': '2021-05-31T10:45:32.459Z', 'ended_at': None, 'status': 'started', 'workflow_id': 'uninstall', 'status_display': 'started'}
+2021-05-31 10:47:24.640  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:47:14.347Z [nagios_vm_y3b1j9.stop] Task succeeded 'cloudify_agent.installer.operations.stop'
+2021-05-31 10:47:24.640  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:47:14.422Z [nagios_vm_y3b1j9] Deleting agent
+2021-05-31 10:47:24.640  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:47:15.196Z [nagios_vm_y3b1j9.delete] Sending task 'cloudify_agent.installer.operations.delete'
+2021-05-31 10:47:24.641  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:47:16.236Z [nagios_vm_y3b1j9.delete] Deleting Agent nagios_vm_y3b1j9
+2021-05-31 10:47:24.641  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:47:22.532Z [nagios_vm_y3b1j9.delete] Deleting...
+2021-05-31 10:47:24.641  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:47:22.532Z [nagios_vm_y3b1j9.delete] 10:47:21 [INFO] [cloudify.utils.is_agent_alive] No ping response from nagios_vm_y3b1j9: No response received for task 400c604237bb4378b25a9e0e65c4a149
+2021-05-31 10:47:24.641  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:47:22.532Z [nagios_vm_y3b1j9.delete] Successfully deleted daemon: nagios_vm_y3b1j9
+2021-05-31 10:47:24.641  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:47:23.656Z [nagios_vm_y3b1j9.delete] Task succeeded 'cloudify_agent.installer.operations.delete'
+2021-05-31 10:47:24.641  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:47:23.746Z [nagios_vm_y3b1j9] Agent deleted
+2021-05-31 10:47:24.641  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:47:23.846Z [nagios_vm_y3b1j9] Stopped node instance: nothing to do
+2021-05-31 10:47:24.641  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:47:24.254Z [nagios_vm_y3b1j9] Deleting node instance
+2021-05-31 10:47:34.704  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: Execution "c45a1eeb-9ce6-4dfa-8716-b292e0a4a02b" of component "nagios_monitoring_1ejv65" state is {'id': 'c45a1eeb-9ce6-4dfa-8716-b292e0a4a02b', 'created_at': '2021-05-31T10:45:32.459Z', 'ended_at': None, 'status': 'started', 'workflow_id': 'uninstall', 'status_display': 'started'}
+2021-05-31 10:47:34.777  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:47:25.022Z [nagios_vm_y3b1j9.delete] Sending task 'cloudify_azure.resources.compute.virtualmachine.delete'
+2021-05-31 10:47:34.777  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:47:26.460Z [nagios_vm_y3b1j9.delete] Get virtual_machine...11d92eb9-0bf5-437a-9bf1-eff8f8d6ca39
+2021-05-31 10:47:34.777  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:47:26.605Z [nagios_vm_y3b1j9.delete] Get virtual_machine result: id : /subscriptions/937eb75f-e9d8-40e7-b7b7-ff1bd75f3d88/resourceGroups/dhl-poc-rg/providers/Microsoft.Compute/virtualMachines/11d92eb9-0bf5-437a-9bf1-eff8f8d6ca39
+name : 11d92eb9-0bf5-437a-9bf1-eff8f8d6ca39
+type : Microsoft.Compute/virtualMachines
+location : westeurope
+hardware_profile : 
+  vm_size : Standard_A1_v2
+storage_profile : 
+  image_reference : 
+    publisher : OpenLogic
+    offer : CentOS
+    sku : 7_9
+    version : 7.9.2020111900
+  os_disk : 
+    os_type : Linux
+    name : 11d92eb9-0bf5-437a-9bf1-eff8f8d6ca39
+    vhd : 
+      uri : http://z0bnwao23u61g2ksq9w1q.blob.core.windows.net/vhds/11d92eb9-0bf5-437a-9bf1-eff8f8d6ca39.vhd
+    caching : ReadWrite
+    create_option : FromImage
+    disk_size_gb : 30
+  data_disks : []
+os_profile : 
+  computer_name : 11d92eb9-0bf5-437a-9bf1-eff8f8d6ca39
+  admin_username : centos
+  linux_configuration : 
+    disable_password_authentication : True
+    ssh : 
+      public_keys : [{'path': '/home/centos/.ssh/authorized_keys', 'key_data': 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDPgS/Y+js4aRz6Yhjs8Z5FL83qspi2cKJdgjEcbSs+BKQG5O+Lj7GRh5tB2k7m80BarAwFLvXcXPOHJfavpwGOjTXO3XBPeLTUESnGk4FrYNmuZuE+0UIK4L/XW+7o8oMGdczWJwVwKX4KUNsxNw/CkPFe5gBsOrXw10XHHruRCe/G5PPSKwo8PRQcKJsHvD7AawpPl5p6BQ5j2niOZqxWwAC34wmiTjIgVdEy0D+un2S+s6I5ElY9sN1cg1SP0idqTWmFkgn0RfKhGzS3sXILMUNFSWmWzxds5jhDeMQNs44ZlR+vB5Nr6W+lVLudsnMLJ4E9wwFR2toSv6VUxvM9'}]
+  secrets : []
+network_profile : 
+  network_interfaces : [{'id': '/subscriptions/937eb75f-e9d8-40e7-b7b7-ff1bd75f3d88/resourceGroups/dhl-poc-rg/providers/Microsoft.Network/networkInterfaces/68ca61ca-d888-407c-8157-ef42740bae85', 'primary': False}]
+provisioning_state : Succeeded
+vm_id : ea93c4dd-1932-4666-b8c3-bbc58f593b96
+
+2021-05-31 10:47:34.777  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:47:26.605Z [nagios_vm_y3b1j9.delete] Deleting virtual_machine...11d92eb9-0bf5-437a-9bf1-eff8f8d6ca39
+2021-05-31 10:47:44.846  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: Execution "c45a1eeb-9ce6-4dfa-8716-b292e0a4a02b" of component "nagios_monitoring_1ejv65" state is {'id': 'c45a1eeb-9ce6-4dfa-8716-b292e0a4a02b', 'created_at': '2021-05-31T10:45:32.459Z', 'ended_at': None, 'status': 'started', 'workflow_id': 'uninstall', 'status_display': 'started'}
+2021-05-31 10:47:44.919  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: Waiting for log messages (execution: c45a1eeb-9ce6-4dfa-8716-b292e0a4a02b)...
+2021-05-31 10:47:54.984  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: Execution "c45a1eeb-9ce6-4dfa-8716-b292e0a4a02b" of component "nagios_monitoring_1ejv65" state is {'id': 'c45a1eeb-9ce6-4dfa-8716-b292e0a4a02b', 'created_at': '2021-05-31T10:45:32.459Z', 'ended_at': None, 'status': 'started', 'workflow_id': 'uninstall', 'status_display': 'started'}
+2021-05-31 10:47:55.062  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: Waiting for log messages (execution: c45a1eeb-9ce6-4dfa-8716-b292e0a4a02b)...
+2021-05-31 10:48:05.132  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: Execution "c45a1eeb-9ce6-4dfa-8716-b292e0a4a02b" of component "nagios_monitoring_1ejv65" state is {'id': 'c45a1eeb-9ce6-4dfa-8716-b292e0a4a02b', 'created_at': '2021-05-31T10:45:32.459Z', 'ended_at': None, 'status': 'started', 'workflow_id': 'uninstall', 'status_display': 'started'}
+2021-05-31 10:48:05.209  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: Waiting for log messages (execution: c45a1eeb-9ce6-4dfa-8716-b292e0a4a02b)...
+2021-05-31 10:48:15.276  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: Execution "c45a1eeb-9ce6-4dfa-8716-b292e0a4a02b" of component "nagios_monitoring_1ejv65" state is {'id': 'c45a1eeb-9ce6-4dfa-8716-b292e0a4a02b', 'created_at': '2021-05-31T10:45:32.459Z', 'ended_at': None, 'status': 'started', 'workflow_id': 'uninstall', 'status_display': 'started'}
+2021-05-31 10:48:15.355  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:07.560Z [nagios_vm_y3b1j9.delete] Task succeeded 'cloudify_azure.resources.compute.virtualmachine.delete'
+2021-05-31 10:48:15.355  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:07.736Z [nagios_vm_y3b1j9] Deleted node instance
+2021-05-31 10:48:15.355  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:08.113Z [nagios_storage_account_l7j6gq] Stopping node instance
+2021-05-31 10:48:15.356  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:08.253Z [nagios_nic_3systu] Stopping node instance
+2021-05-31 10:48:15.356  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:08.286Z [nagios_storage_account_l7j6gq] Validating node instance after deletion: nothing to do
+2021-05-31 10:48:15.356  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:08.348Z [nagios_storage_account_l7j6gq] Stopped node instance: nothing to do
+2021-05-31 10:48:15.356  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:08.384Z [nagios_nic_3systu] Validating node instance after deletion: nothing to do
+2021-05-31 10:48:15.356  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:08.556Z [nagios_nic_3systu] Stopped node instance: nothing to do
+2021-05-31 10:48:15.356  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:08.757Z [nagios_storage_account_l7j6gq] Deleting node instance
+2021-05-31 10:48:15.356  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:09.506Z [nagios_storage_account_l7j6gq.delete] Sending task 'cloudify_azure.resources.storage.storageaccount.delete'
+2021-05-31 10:48:15.356  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:09.923Z [nagios_nic_3systu] Deleting node instance
+2021-05-31 10:48:15.356  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:10.711Z [nagios_nic_3systu.delete] Sending task 'cloudify_azure.resources.network.networkinterfacecard.delete'
+2021-05-31 10:48:15.356  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:10.586Z [nagios_storage_account_l7j6gq.delete] Get Storage Account...z0bnwao23u61g2ksq9w1q
+2021-05-31 10:48:15.356  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:10.755Z [nagios_storage_account_l7j6gq.delete] Get storage_account result: id : /subscriptions/937eb75f-e9d8-40e7-b7b7-ff1bd75f3d88/resourceGroups/dhl-poc-rg/providers/Microsoft.Storage/storageAccounts/z0bnwao23u61g2ksq9w1q
+name : z0bnwao23u61g2ksq9w1q
+type : Microsoft.Storage/storageAccounts
+location : westeurope
+tags : 
+  provisioning_state : Succeeded
+account_type : Standard_LRS
+primary_endpoints : 
+  blob : https://z0bnwao23u61g2ksq9w1q.blob.core.windows.net/
+  queue : https://z0bnwao23u61g2ksq9w1q.queue.core.windows.net/
+  table : https://z0bnwao23u61g2ksq9w1q.table.core.windows.net/
+  file : https://z0bnwao23u61g2ksq9w1q.file.core.windows.net/
+primary_location : westeurope
+status_of_primary : Available
+creation_time : 2021-05-31T10:06:54.185591Z
+
+2021-05-31 10:48:15.356  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:10.755Z [nagios_storage_account_l7j6gq.delete] Deleting Storage Account...z0bnwao23u61g2ksq9w1q
+2021-05-31 10:48:15.357  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:11.863Z [nagios_nic_3systu.delete] Get network_interface...68ca61ca-d888-407c-8157-ef42740bae85
+2021-05-31 10:48:15.357  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:11.967Z [nagios_nic_3systu.delete] Get network_interface result: id : /subscriptions/937eb75f-e9d8-40e7-b7b7-ff1bd75f3d88/resourceGroups/dhl-poc-rg/providers/Microsoft.Network/networkInterfaces/68ca61ca-d888-407c-8157-ef42740bae85
+name : 68ca61ca-d888-407c-8157-ef42740bae85
+type : Microsoft.Network/networkInterfaces
+location : westeurope
+ip_configurations : [{'id': '/subscriptions/937eb75f-e9d8-40e7-b7b7-ff1bd75f3d88/resourceGroups/dhl-poc-rg/providers/Microsoft.Network/networkInterfaces/68ca61ca-d888-407c-8157-ef42740bae85/ipConfigurations/f180b45a-1166-4ba1-aa05-956e3a7e4706', 'private_ip_address': '10.2.0.8', 'private_ip_allocation_method': 'Dynamic', 'private_ip_address_version': 'IPv4', 'subnet': {'id': '/subscriptions/937eb75f-e9d8-40e7-b7b7-ff1bd75f3d88/resourceGroups/dhl-poc-rg/providers/Microsoft.Network/virtualNetworks/dhl-poc-rg-vnet/subnets/default'}, 'primary': True, 'public_ip_address': {'id': '/subscriptions/937eb75f-e9d8-40e7-b7b7-ff1bd75f3d88/resourceGroups/dhl-poc-rg/providers/Microsoft.Network/publicIPAddresses/80154419-8cf1-4e15-b370-6717fb68df60'}, 'provisioning_state': 'Succeeded', 'name': 'f180b45a-1166-4ba1-aa05-956e3a7e4706', 'etag': 'W/"25bf219c-746d-4733-806d-e3d819a1fe17"'}]
+dns_settings : 
+  dns_servers : []
+  applied_dns_servers : []
+mac_address : 00-0D-3A-44-37-EE
+enable_accelerated_networking : False
+enable_ip_forwarding : False
+resource_guid : 64093b2d-380e-4582-b021-d4ebf3764c08
+provisioning_state : Succeeded
+etag : W/"25bf219c-746d-4733-806d-e3d819a1fe17"
+
+2021-05-31 10:48:15.357  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:11.967Z [nagios_nic_3systu.delete] Deleting network_interface...68ca61ca-d888-407c-8157-ef42740bae85
+2021-05-31 10:48:15.357  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:12.760Z [nagios_storage_account_l7j6gq.delete] Task succeeded 'cloudify_azure.resources.storage.storageaccount.delete'
+2021-05-31 10:48:15.357  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:12.933Z [nagios_storage_account_l7j6gq] Deleted node instance
+2021-05-31 10:48:25.429  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: Execution "c45a1eeb-9ce6-4dfa-8716-b292e0a4a02b" of component "nagios_monitoring_1ejv65" state is {'id': 'c45a1eeb-9ce6-4dfa-8716-b292e0a4a02b', 'created_at': '2021-05-31T10:45:32.459Z', 'ended_at': None, 'status': 'started', 'workflow_id': 'uninstall', 'status_display': 'started'}
+2021-05-31 10:48:25.502  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:22.796Z [nagios_nic_3systu.delete] Task succeeded 'cloudify_azure.resources.network.networkinterfacecard.delete'
+2021-05-31 10:48:25.502  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:22.906Z [nagios_nic_3systu] Deleted node instance
+2021-05-31 10:48:25.502  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:23.281Z [nagios_ip_config_9zey9r] Stopping node instance
+2021-05-31 10:48:25.502  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:23.384Z [nagios_ip_config_9zey9r] Validating node instance after deletion: nothing to do
+2021-05-31 10:48:25.502  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:23.484Z [nagios_ip_config_9zey9r] Stopped node instance: nothing to do
+2021-05-31 10:48:25.502  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:23.787Z [nagios_ip_config_9zey9r] Deleting node instance: nothing to do
+2021-05-31 10:48:25.502  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:23.996Z [nagios_ip_config_9zey9r] Deleted node instance
+2021-05-31 10:48:25.502  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:24.374Z [nagios_public_ip_f5c6s9] Stopping node instance
+2021-05-31 10:48:25.503  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:24.515Z [subnet_3p9kpg] Stopping node instance
+2021-05-31 10:48:25.503  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:24.554Z [nagios_public_ip_f5c6s9] Validating node instance after deletion: nothing to do
+2021-05-31 10:48:25.503  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:24.604Z [nagios_public_ip_f5c6s9] Stopped node instance: nothing to do
+2021-05-31 10:48:25.503  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:24.639Z [subnet_3p9kpg] Validating node instance after deletion: nothing to do
+2021-05-31 10:48:35.569  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: Execution "c45a1eeb-9ce6-4dfa-8716-b292e0a4a02b" of component "nagios_monitoring_1ejv65" state is {'id': 'c45a1eeb-9ce6-4dfa-8716-b292e0a4a02b', 'created_at': '2021-05-31T10:45:32.459Z', 'ended_at': None, 'status': 'started', 'workflow_id': 'uninstall', 'status_display': 'started'}
+2021-05-31 10:48:35.653  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:24.809Z [subnet_3p9kpg] Stopped node instance: nothing to do
+2021-05-31 10:48:35.653  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:25.013Z [nagios_public_ip_f5c6s9] Deleting node instance
+2021-05-31 10:48:35.653  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:25.766Z [nagios_public_ip_f5c6s9.delete] Sending task 'cloudify_azure.resources.network.publicipaddress.delete'
+2021-05-31 10:48:35.653  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:26.184Z [subnet_3p9kpg] Deleting node instance
+2021-05-31 10:48:35.653  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:26.944Z [subnet_3p9kpg.delete] Sending task 'cloudify_azure.resources.network.subnet.delete'
+2021-05-31 10:48:35.653  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:26.907Z [nagios_public_ip_f5c6s9.delete] Get public_ip_address...80154419-8cf1-4e15-b370-6717fb68df60
+2021-05-31 10:48:35.653  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:27.042Z [nagios_public_ip_f5c6s9.delete] Get public_ip_address result: id : /subscriptions/937eb75f-e9d8-40e7-b7b7-ff1bd75f3d88/resourceGroups/dhl-poc-rg/providers/Microsoft.Network/publicIPAddresses/80154419-8cf1-4e15-b370-6717fb68df60
+name : 80154419-8cf1-4e15-b370-6717fb68df60
+type : Microsoft.Network/publicIPAddresses
+location : westeurope
+public_ip_allocation_method : Static
+public_ip_address_version : IPv4
+ip_address : 52.148.222.125
+idle_timeout_in_minutes : 4
+resource_guid : f2505f4c-a087-49dd-94f0-8dc95275813d
+provisioning_state : Succeeded
+etag : W/"69847511-d5c3-48e7-bd0e-c56ebc3ed19e"
+
+2021-05-31 10:48:35.653  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:27.042Z [nagios_public_ip_f5c6s9.delete] Deleting public_ip_address...80154419-8cf1-4e15-b370-6717fb68df60
+2021-05-31 10:48:35.654  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:28.390Z [subnet_3p9kpg.delete] Task succeeded 'cloudify_azure.resources.network.subnet.delete'
+2021-05-31 10:48:35.654  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:28.575Z [subnet_3p9kpg] Deleted node instance
+2021-05-31 10:48:35.654  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:28.953Z [network_bb3k9l] Stopping node instance
+2021-05-31 10:48:35.654  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:29.037Z [network_bb3k9l] Validating node instance after deletion: nothing to do
+2021-05-31 10:48:35.654  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:29.137Z [network_bb3k9l] Stopped node instance: nothing to do
+2021-05-31 10:48:35.654  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:29.542Z [network_bb3k9l] Deleting node instance
+2021-05-31 10:48:35.654  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:30.310Z [network_bb3k9l.delete] Sending task 'cloudify_azure.resources.network.virtualnetwork.delete'
+2021-05-31 10:48:35.654  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:31.755Z [network_bb3k9l.delete] Task succeeded 'cloudify_azure.resources.network.virtualnetwork.delete'
+2021-05-31 10:48:35.654  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:31.931Z [network_bb3k9l] Deleted node instance
+2021-05-31 10:48:45.713  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: Execution "c45a1eeb-9ce6-4dfa-8716-b292e0a4a02b" of component "nagios_monitoring_1ejv65" state is {'id': 'c45a1eeb-9ce6-4dfa-8716-b292e0a4a02b', 'created_at': '2021-05-31T10:45:32.459Z', 'ended_at': '2021-05-31T10:48:42.027Z', 'status': 'terminated', 'workflow_id': 'uninstall', 'status_display': 'terminated'}
+2021-05-31 10:48:45.787  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:37.987Z [nagios_public_ip_f5c6s9.delete] Task succeeded 'cloudify_azure.resources.network.publicipaddress.delete'
+2021-05-31 10:48:45.787  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:38.188Z [nagios_public_ip_f5c6s9] Deleted node instance
+2021-05-31 10:48:45.787  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:38.570Z [resource_group_u5obq4] Stopping node instance
+2021-05-31 10:48:45.788  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:38.657Z [resource_group_u5obq4] Validating node instance after deletion: nothing to do
+2021-05-31 10:48:45.788  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:38.758Z [resource_group_u5obq4] Stopped node instance: nothing to do
+2021-05-31 10:48:45.788  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:39.168Z [resource_group_u5obq4] Deleting node instance
+2021-05-31 10:48:45.788  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:39.930Z [resource_group_u5obq4.delete] Sending task 'cloudify_azure.resources.resourcegroup.delete'
+2021-05-31 10:48:45.788  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:41.581Z [resource_group_u5obq4.delete] Task succeeded 'cloudify_azure.resources.resourcegroup.delete'
+2021-05-31 10:48:45.788  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:41.753Z [resource_group_u5obq4] Deleted node instance
+2021-05-31 10:48:45.788  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: 2021-05-31T10:48:42.056Z 'uninstall' workflow execution succeeded
+2021-05-31 10:48:45.788  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: Execution succeeded for "nagios_monitoring_1ejv65" deployment
+2021-05-31 10:48:45.788  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: Fetching "nagios_monitoring_1ejv65" deployment capabilities..
+2021-05-31 10:48:45.912  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] INFO: Fetched capabilities:
+{
+ "nagios_address": null,
+ "nagios_public_address": null,
+ "nagios_ssl_certificate": "-----BEGIN CERTIFICATE-----\nMIIC9zCCAd+gAwIBAgIJAKGZXr5/YB/uMA0GCSqGSIb3DQEBCwUAMBQxEjAQBgNV\nBAMMCTEyNy4wLjAuMTAgFw0yMTA1MzExMDE0NTZaGA8yMTIxMDUwNzEwMTQ1Nlow\nFDESMBAGA1UEAwwJMTI3LjAuMC4xMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIB\nCgKCAQEAsU1ZJHjVjkKKilXvxkW8KT0D/WKeGCa3+FToBnK4lWd2HSYVubWM0vPi\n17ch/acsf1tcnmn8ET8BZ/KuVe3T/qp7iil6IxRecWCZOq8DpryONo6aMT+08jKR\nSa3ROFCchwvnnd4iNNFCSUMW0iesuE5MH5Sn9ul3j+r/faSWzVFbO/mTY3m4Qvn8\nugTsGboz1p8XKLfXk+USLLZSWb8CUSIn0CRozaAsrMWvLJ5RJnq2rCh3N8yUuTaT\n6SvnFWaUS1tmY91RF5NUIWv6yVa7LJJjLoaW4MNXpJ3Kh2GnzkidqZ+2P3l1PwrI\nXPlWZpGtWB+SDs5t+e7pIZdbdCeBEwIDAQABo0owSDA1BgNVHREELjAshwR/AAAB\nggkxMjcuMC4wLjGHBAoCAAiCCDEwLjIuMC44gglsb2NhbGhvc3QwDwYDVR0TAQH/\nBAUwAwEB/zANBgkqhkiG9w0BAQsFAAOCAQEAYR+bf+7puJrnLSZR1oQqXMMWoH3O\n7xTUmKA+7P5PfoJ0+n2QxN2DcshUOosqyMNUgMTmbdP152N26GCCYzB9kmua35/M\n7W28yg/Jm4mq4u16TVOmb4k6ndbUnifU61+LLt6jVBWZvsXA1u/8yNEN99bo5h3u\nz6/eAcqluU3Je1NTa7v4a9lF5AVpv0Pr6//N3YE1j5s3erQzkwBlPaLZjz4IvLe2\nBPEWfch2FBStz5c/+4Z8eqTYK1PONLt4J5xF4W/7bq7/sFAyNuSpUFJG7gN5NcRK\nRyAvrj1pCT9H+MjkLmnItOOPpSQjh6Q1R5kiiyYHytMbTiBy4+LWoS0TUw==\n-----END CERTIFICATE-----\n",
+ "nagios_user": "nagios",
+ "nagios_password": "nagioscloudify"
+}
+2021-05-31 10:48:46.639  CFY <kfr_v11_day3> [nagios_monitoring_1ejv65.stop] Task succeeded 'cloudify_types.component.execute_start (True)'
+2021-05-31 10:48:46.661  CFY <kfr_v11_day3> [nagios_monitoring_1ejv65] Stopped node instance
+2021-05-31 10:48:47.071  CFY <kfr_v11_day3> [nagios_monitoring_1ejv65] Deleting node instance
+2021-05-31 10:48:47.842  CFY <kfr_v11_day3> [nagios_monitoring_1ejv65.delete] Sending task 'cloudify_types.component.delete'
+2021-05-31 10:48:48.761  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.delete] INFO: Wait for component's stop deployment operation related executions.
+2021-05-31 10:48:48.889  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.delete] INFO: Delete component's "nagios_monitoring_1ejv65" deployment
+2021-05-31 10:48:50.007  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.delete] INFO: Waiting for component's deployment delete.
+2021-05-31 10:49:10.275  LOG <kfr_v11_day3> [nagios_monitoring_1ejv65.delete] INFO: Removing inter-deployment dependency between this deployment ("nagios_monitoring_1ejv65") and "kfr_v11_day3" the Component's creator deployment...
+2021-05-31 10:49:11.034  CFY <kfr_v11_day3> [nagios_monitoring_1ejv65.delete] Task succeeded 'cloudify_types.component.delete (True)'
+2021-05-31 10:49:11.214  CFY <kfr_v11_day3> [nagios_monitoring_1ejv65] Deleted node instance
+2021-05-31 10:49:11.491  CFY <kfr_v11_day3> 'uninstall' workflow execution succeeded
+Finished executing workflow uninstall on deployment kfr_v11_day3
+* Run 'cfy events list 0988de2c-ffcc-49ad-8268-2ecfbf401605' to retrieve the execution's events/logs
+Trying to delete deployment kfr_v11_day3...
+Deployment deleted
+Deleting blueprint kfr_v11_day3...
+Blueprint deleted
+Deleting blueprint kfr_v11_nagios...
+Blueprint deleted
+Deleting blueprint kfr_v11_nginx...
+Blueprint deleted
+Deleting blueprint kfr_v11_nodejs...
+Blueprint deleted

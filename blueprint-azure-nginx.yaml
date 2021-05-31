@@ -9,6 +9,7 @@ imports:
   - plugin:cloudify-ansible-plugin
   - plugin:cloudify-utilities-plugin
   - plugin:cloudify-nagiosrest-plugin
+  - plugin:cloudify-daclp-plugin 
   - blueprint-common.yaml
 
 node_templates:
@@ -36,6 +37,32 @@ node_templates:
                   extra_vars:
                     domain: cfy-hello
                     message: { get_input: message }
+  run2:
+    type: cloudify.nodes.ansible.Playbook
+    properties:
+      playbook_path: ansible/nginx/site.yaml
+    relationships:
+      - type: cloudify.ansible.relationships.run_on_host
+        target: webserver_vm
+        source_interfaces:
+          cloudify.interfaces.relationship_lifecycle:
+            establish:
+              inputs:
+                sources:
+                  webservers:
+                    hosts:
+                      web:
+                        ansible_host: { get_attribute: [ webserver_vm, ip ] }
+                        ansible_user: { get_input: webserver_vm_os_username }
+                        ansible_ssh_private_key_file: { get_property: [ webserver_vm, agent_config, key ] }
+                        ansible_become: true
+                        ansible_ssh_common_args: -o StrictHostKeyChecking=no
+                options_config:
+                  extra_vars:
+                    domain: cfy-hello
+                    message: "The updated message"
+      - type: cloudify.relationships.depends_on
+        target: run
 
   check:
     type: cloudify.nodes.Root

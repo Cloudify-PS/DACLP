@@ -12,36 +12,55 @@ dsl_definitions:
       delta: 1
 
   app_cause_snmp_ram: &app_cause_snmp_ram
-    workflow_id: execute_operation
+    workflow_id: call_lifecycle_operations
     parameters:
-      operation: cloudify.interfaces.lifecycle.create
-      operation_kwargs:
-        args:
-          hardwareProfile:
-            vmSize: Standard_A2_v2
-      run_by_dependency_order: false
-      type_names: []
-      node_ids:
-        - webserver_vm
-      node_instance_ids: []
+      node_instance_id: "{{instance}}"
+      operations_with_kwargs:
+        - cloudify.interfaces.monitoring.stop: {}
+        - cloudify.interfaces.lifecycle.stop: {}
+        - cloudify.interfaces.lifecycle.check_stoppped: {}
+        - cloudify.interfaces.lifecycle.create: {"args": { "hardwareProfile": {"vmSize": "Standard_A1_v2"} } }
+        - cloudify.interfaces.lifecycle.start: {}
+        - cloudify.interfaces.monitoring.start: {}
+#    workflow_id: execute_operation
+#    parameters:
+#      operation: cloudify.interfaces.lifecycle.create
+#      operation_kwargs:
+#        args:
+#          hardwareProfile:
+#            vmSize: Standard_A2_v2
+#      run_by_dependency_order: false
+#      type_names: []
+#      node_ids:
+#        - webserver_vm
+#      node_instance_ids: []
 
   app_cause_snmp_storage: &app_cause_snmp_storage
-    workflow_id: execute_operation
+    workflow_id: call_lifecycle_operations
     parameters:
-      operation: cloudify.interfaces.lifecycle.create
-      operation_kwargs:
-        args:
-          hardwareProfile:
-            vmSize: Standard_A1_v2
-          storageProfile:
-            os_disk:
-              diskSizeGB: 70
-      allow_kwargs_override: true
-      run_by_dependency_order: false
-      type_names: []
-      node_ids:
-        - webserver_vm
-      node_instance_ids: []
+      node_instance_id: "{{instance}}"
+      operations_with_kwargs:
+        - cloudify.interfaces.monitoring.stop: {}
+        - cloudify.interfaces.lifecycle.stop: {}
+        - cloudify.interfaces.lifecycle.create: {"args": { "storageProfile": { "os_disk": { "diskSizeGB": 70 } } } }
+        - cloudify.interfaces.lifecycle.start: {}
+        - cloudify.interfaces.monitoring.start: {}
+#    workflow_id: execute_operation
+#    parameters:
+#      operation: cloudify.interfaces.lifecycle.create
+#      operation_kwargs:
+#        args:
+#          hardwareProfile:
+#            vmSize: Standard_A1_v2
+#          storageProfile:
+#            os_disk:
+#              diskSizeGB: 70
+#      allow_kwargs_override: true
+#      run_by_dependency_order: false
+#      type_names: []
+#      node_ids:
+#        - webserver_vm
+#      node_instance_ids: []
 
   v3_snmp: &v3_snmp
     username: { get_secret: snmp_user }
@@ -68,35 +87,20 @@ node_templates:
       snmp_properties:
         v3: *v3_snmp
     relationships:
-      - type: cloudify.nagios.target_type_checks
-        target: reachability_check
       - type: cloudify.nagios.configuration_for_nagios_server
         target: nagios
+      - type: cloudify.nagios.target_type_checks
+        target: reachability_check
+      - type: cloudify.nagios.target_type_checks
+        target: cpu_load_check
+      - type: cloudify.nagios.target_type_checks
+        target: storage_check
 
   reachability_check:
     type: cloudify.nagios.nodes.SNMPValueCheck
     properties:
       check_description: 1 minute load average
       snmp_oid: UCD-SNMP-MIB::laLoad.1
-
-  cluster_scale_target_type:
-    type: cloudify.nagios.nodes.TargetType
-    properties:
-      name: cluster_scale_target_type
-      alias: Alias of cluster_scale_target_type
-      instance_health_check: do-not-check
-      max_check_retries: 3
-      snmp_properties:
-        v3: *v3_snmp
-    relationships:
-      - type: cloudify.nagios.configuration_for_nagios_server
-        target: nagios
-      - type: cloudify.nagios.target_type_checks
-        target: cpu_load_check
-      - type: cloudify.nagios.target_type_checks
-        target: storage_check
-      # - type: cloudify.nagios.target_type_checks
-      #   target: ram_check
 
   cpu_load_check:
     type: cloudify.nagios.nodes.SNMPValueCheck
@@ -116,7 +120,7 @@ node_templates:
     properties:
       check_description: Get disk usagge percentage
       snmp_oid: UCD-SNMP-MIB::dskPercent.1
-      high_critical_threshold: { get_input: 
+      high_critical_threshold: { get_input: used_storage_percentage_threshold }
       action_on_high_threshold: *app_cause_snmp_storage
       check_interval: 0.25
       max_check_retries: 0

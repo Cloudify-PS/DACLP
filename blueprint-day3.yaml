@@ -8,14 +8,6 @@ inputs:
   deployment_version:
     type: string
 
-  use_exisiting_nagios_deployment:
-    type: boolean
-    default: false
-
-  exisiting_nagios_deployment_id:
-    type: string
-    default: {concat: [{get_input: deployment_version}, _nagios]}
-
   app_server_type:
     description: >
       Choose the server type that the application will be hosted on.
@@ -76,6 +68,7 @@ inputs:
 node_templates:
   nagios_monitoring:
     type: cloudify.nodes.ServiceComponent
+#    type: cloudify.nodes.SharedResource
     properties:
       client:
         host: 127.0.0.1
@@ -83,6 +76,8 @@ node_templates:
         password: { get_secret: cloudify_manager_user_password }
         tenant: { get_input: target_resource_tenant }
       resource_config:
+#        deployment:
+#          id: nagios_monitoring_6dse98
         blueprint:
           external_resource: true
           id: { concat: [{get_input: deployment_version}, _nagios] }
