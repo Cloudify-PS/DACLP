@@ -122,7 +122,6 @@ node_templates:
             location: { get_input: location }
             resource_group: { get_input: resource_group }
             cpu_idle_threshold: { get_input: cpu_idle_threshold }
-            storage_percentage_threshold: { get_input: storage_percentage_threshold }
 
   azure_vm:
     type: cloudify.nodes.ServiceComponent
@@ -184,12 +183,11 @@ node_templates:
             virtual_machine_image_offer: { get_input: f5_virtual_machine_image_offer }
             retry_after: { get_input: retry_after }
             network_api_version: { get_input: f5_network_api_version }
-            azure_network_deployment_name: { get_input: azure_network_deployment_name }
             resource_prefix: { get_input: f5_resource_prefix }
             resource_suffix: { get_input: f5_resource_suffix }
-    relationships:
-      - type: cloudify.relationships.depends_on
-        target: azure_vm
+    # relationships:
+    #   - type: cloudify.relationships.depends_on
+    #     target: azure_vm
 
 outputs:
   resource_group:
