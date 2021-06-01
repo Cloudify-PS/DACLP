@@ -158,7 +158,7 @@ node_templates:
         password: { get_input: nagios_password }
         target_type: app_vm_heal_target_type
     interfaces:
-      cloudify.interfaces.lifecycle:
+      cloudify.interfaces.daclp:
         stop: 
           implementation: rest.cloudify_rest.tasks.execute
           inputs:
@@ -174,6 +174,26 @@ node_templates:
           implementation: rest.cloudify_rest.tasks.execute
           inputs:
             template_file: templates/check_stopped_vm.yaml
+            params: *azure_api_params
+        deallocate: 
+          implementation: rest.cloudify_rest.tasks.execute
+          inputs:
+            template_file: templates/deallocate_vm.yaml
+            params: *azure_api_params
+        check_deallocated: 
+          implementation: rest.cloudify_rest.tasks.execute
+          inputs:
+            template_file: templates/check_deallocated_vm.yaml
+            params: *azure_api_params
+        start: 
+          implementation: rest.cloudify_rest.tasks.execute
+          inputs:
+            template_file: templates/start_vm.yaml
+            params: *azure_api_params
+        check_started: 
+          implementation: rest.cloudify_rest.tasks.execute
+          inputs:
+            template_file: templates/check_started_vm.yaml
             params: *azure_api_params
     relationships:
       - type: cloudify.azure.relationships.contained_in_resource_group
@@ -268,6 +288,7 @@ groups:
       - run
       - check
       - snmp_conf
+      - service_update
 
 policies:
   vm_scaling_policy:

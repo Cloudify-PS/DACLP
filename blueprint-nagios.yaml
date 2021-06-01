@@ -20,6 +20,10 @@ inputs:
 
   used_storage_percentage_threshold:
     type: integer
+
+  free_ram_threshold:
+    type: integer
+    default: 1048576
  
 dsl_definitions:
   client_config: &client_config
