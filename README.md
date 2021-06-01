@@ -31,7 +31,8 @@ Allows Cloudify to trigger upgrade procedure for the VM
 workflow `execute_operation`
 
 wokrflow params
-`{
+```
+{
    "operation":"cloudify.interfaces.lifecycle.upgrade",
    "operation_kwargs":{
 
@@ -47,7 +48,8 @@ wokrflow params
    "node_instance_ids":[
 
    ]
-}`
+}
+```
 
 ## Confiugration update
 Changes web page message
