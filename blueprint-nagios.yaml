@@ -24,7 +24,13 @@ inputs:
   free_ram_threshold:
     type: integer
     default: 1048576
- 
+
+  cpu_idle_threshold:
+    type: integer
+    default: 70
+    description: >
+      idle percentage to trigger scale-out
+
 dsl_definitions:
   client_config: &client_config
     subscription_id: { get_secret: azure_subscription_id }

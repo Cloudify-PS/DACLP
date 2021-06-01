@@ -74,13 +74,6 @@ dsl_definitions:
     auth_pass: { get_secret: snmp_pass }
     priv_pass: { get_secret: snmp_pass }
 
-inputs:
-  cpu_idle_threshold:
-    type: integer
-    default: 20
-    description: >
-      idle percentage to trigger scale-out
-
 node_templates:
   app_vm_heal_target_type:
     type: cloudify.nagios.nodes.TargetType

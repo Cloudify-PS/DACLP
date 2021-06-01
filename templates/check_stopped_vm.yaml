@@ -14,11 +14,11 @@ rest_calls:
     ssl: true
 
   - path: '/subscriptions/{{subscription_id}}/resourceGroups/{{resource_group}}/providers/Microsoft.Compute/virtualMachines/{{vm_name}}/instanceView?api-version=2021-03-01'
-    method: POST
+    method: GET
     headers:
       Authorization: 'Bearer {{token}}'
     payload_format: raw
-    response_format: raw
+    response_format: json
     retry_on_connection_error: true
     response_expectation:
       - [ 'statuses', 1, 'code', 'PowerState/stopped']
