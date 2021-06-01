@@ -56,7 +56,8 @@ Changes web page message
 workflow `execute_operation`
 
 workflow params
-`{
+```
+{
    "operation":"cloudify.interfaces.lifecycle.update",
    "operation_kwargs":{
       "domain": "cfy-hello",
@@ -74,13 +75,15 @@ workflow params
    "node_instance_ids":[
 
    ]
-}`
+}
+```
 
 ### nodejs
 workflow `execute_operation`
 
 workflow params
-`{
+```
+{
    "operation":"cloudify.interfaces.lifecycle.update",
    "operation_kwargs":{
       "user": "centos",
@@ -98,4 +101,5 @@ workflow params
    "node_instance_ids":[
 
    ]
-}`
+}
+```
