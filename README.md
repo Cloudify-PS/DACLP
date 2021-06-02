@@ -110,7 +110,7 @@ workflow params
 ## Setup env variables
 Adjust only the first line
 ```
-export DEPLOYMENT_VERSION=${USER}_v1 && \
+export DEPLOYMENT_VERSION=${USER}_`date --iso-8601=seconds | tr -d '+:'` && \
 export DAY3_BLUEPRINT_ID=${DEPLOYMENT_VERSION}_day3 && \
 export NAGIOS_BLUEPRINT_ID=${DEPLOYMENT_VERSION}_nagios && \
 export NGINX_BLUEPRINT_ID=${DEPLOYMENT_VERSION}_nginx && \
