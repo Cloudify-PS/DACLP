@@ -105,3 +105,32 @@ workflow params
    ]
 }
 ```
+
+# Testing
+## Setup env variables
+Adjust only the first line
+```
+export DEPLOYMENT_VERSION=${USER}_v1 && \
+export DAY3_BLUEPRINT_ID=${DEPLOYMENT_VERSION}_day3 && \
+export NAGIOS_BLUEPRINT_ID=${DEPLOYMENT_VERSION}_nagios && \
+export NGINX_BLUEPRINT_ID=${DEPLOYMENT_VERSION}_nginx && \
+export NODEJS_BLUEPRINT_ID=${DEPLOYMENT_VERSION}_nodejs
+```
+
+## Deploy
+```
+cfy blueprints upload -b ${NAGIOS_BLUEPRINT_ID} blueprint-nagios.yaml && \
+cfy blueprints upload -b ${NGINX_BLUEPRINT_ID} blueprint-azure-nginx.yaml && \
+cfy blueprints upload -b ${NODEJS_BLUEPRINT_ID} blueprint-azure-nodejs.yaml && \
+cfy install -i deployment_version=${DEPLOYMENT_VERSION} -b ${DAY3_BLUEPRINT_ID} -d ${DAY3_BLUEPRINT_ID} blueprint-day3.yaml
+```
+
+## Remove
+The command below will run in background 
+```
+nohup sh -c "cfy uninstall -p ignore_failure=true ${DAY3_BLUEPRINT_ID} || \
+cfy blueprints delete ${DAY3_BLUEPRINT_ID} ; \
+cfy blueprints delete ${NAGIOS_BLUEPRINT_ID} ; \
+cfy blueprints delete ${NGINX_BLUEPRINT_ID} ; \
+cfy blueprints delete ${NODEJS_BLUEPRINT_ID} " &
+```
