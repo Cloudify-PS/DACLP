@@ -65,42 +65,6 @@ inputs:
     description: >
       Percentage of used storage to trigger storage scale-up.
 
-  f5_virtual_machine_size:
-    description: Name of Virtual Machine Size in Azure.
-    default: Standard_DS4_v2
-
-  f5_virtual_machine_image_sku:
-    description: An instance of an offer, such as a major release of a distribution.
-    default: 'f5-big-all-1slot-byol'
-
-  f5_virtual_machine_image_publisher:
-    description: Name of the organization that created the image.
-    default: 'f5-networks'
-
-  f5_virtual_machine_image_offer:
-    description: The name of a group of related images created by a publisher.
-    default: 'f5-big-ip-byol'
-
-  retry_after:
-    type: integer
-    default: 60
-
-  f5_network_api_version:
-    description: API Version for Network
-    default: "2015-06-15"
-
-  azure_network_deployment_name:
-    description: Name of deployment responsible for creation resource group, security group and networks.
-    default: azure-vm-deployment
-
-  f5_resource_prefix:
-    description: Prefix of every resource created at this deployment on Azure.
-    default: ""
-
-  f5_resource_suffix:
-    description: Suffix of every resource created at this deployment on Azure.
-    default: ""
-
 node_templates:
   nagios_monitoring:
     type: cloudify.nodes.ServiceComponent
@@ -123,7 +87,35 @@ node_templates:
             location: { get_input: location }
             resource_group: { get_input: resource_group }
             used_storage_percentage_threshold: { get_input: used_storage_percentage_threshold }
-            cpu_idle_threshold: { get_input: cpu_idle_threshold }
+
+  f5_bigip:
+    type: cloudify.nodes.ServiceComponent
+    properties:
+      client:
+        host: 127.0.0.1
+        username: { get_secret: cloudify_manager_user_name }
+        password: { get_secret: cloudify_manager_user_password }
+        tenant: { get_input: target_resource_tenant }
+      resource_config:
+        blueprint:
+          external_resource: false
+          id: f5-bigip-bp
+          blueprint_archive: https://github.com/Cloudify-PS/DACLP/archive/refs/heads/day3_dev.zip
+          main_file_name: blueprint-f5-bigip.yaml
+        deployment:
+          id: f5-bigip-deployment
+          auto_inc_suffix: false
+          inputs:
+            location: { get_input: location }
+            resource_group: { get_input: resource_group }
+            virtual_machine_size: Standard_DS4_v2
+            virtual_machine_image_sku: 'f5-big-all-1slot-byol'
+            virtual_machine_image_publisher: 'f5-networks'
+            virtual_machine_image_offer: 'f5-big-ip-byol'
+            retry_after: 60
+            network_api_version: "2015-06-15"
+            resource_prefix: ""
+            resource_suffix: ""
 
   azure_vm:
     type: cloudify.nodes.ServiceComponent
@@ -150,38 +142,13 @@ node_templates:
             nagios_ssl_certificate: { get_attribute: [nagios_monitoring, capabilities, nagios_ssl_certificate] }
             nagios_user: { get_attribute: [nagios_monitoring, capabilities, nagios_user] }
             nagios_password: { get_attribute: [nagios_monitoring, capabilities, nagios_password] }
+            f5_wan_ip: { get_attribute: [f5_bigip, capabilities, wan_ip] }
+            f5_public_ip: { get_attribute: [f5_bigip, capabilities, public_ip] }
     relationships:
       - type: cloudify.relationships.depends_on
         target: nagios_monitoring
-
-  f5_bigip:
-    type: cloudify.nodes.ServiceComponent
-    properties:
-      client:
-        host: 127.0.0.1
-        username: { get_secret: cloudify_manager_user_name }
-        password: { get_secret: cloudify_manager_user_password }
-        tenant: { get_input: target_resource_tenant }
-      resource_config:
-        blueprint:
-          external_resource: false
-          id: f5-bigip-bp
-          blueprint_archive: https://github.com/Cloudify-PS/DACLP/archive/refs/heads/day3_dev.zip
-          main_file_name: blueprint-f5-bigip.yaml
-        deployment:
-          id: f5-bigip-deployment
-          auto_inc_suffix: false
-          inputs:
-            location: { get_input: location }
-            resource_group: { get_input: resource_group }
-            virtual_machine_size: { get_input: f5_virtual_machine_size }
-            virtual_machine_image_sku: { get_input: f5_virtual_machine_image_sku }
-            virtual_machine_image_publisher: { get_input: f5_virtual_machine_image_publisher }
-            virtual_machine_image_offer: { get_input: f5_virtual_machine_image_offer }
-            retry_after: { get_input: retry_after }
-            network_api_version: { get_input: f5_network_api_version }
-            resource_prefix: { get_input: f5_resource_prefix }
-            resource_suffix: { get_input: f5_resource_suffix }
+      - type: cloudify.relationships.depends_on
+        target: f5_bigip
 
 outputs:
   resource_group:

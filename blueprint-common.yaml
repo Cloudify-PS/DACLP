@@ -54,6 +54,16 @@ inputs:
     description: >
       Nagios REST password
 
+  f5_wan_ip:
+    type: string
+    description: >
+      WAN IP of the F5 Load Balancer
+
+  f5_public_ip:
+    type: string
+    description: >
+      Public IP of the F5 Load Balancer
+
 dsl_definitions:
   client_config: &client_config
     subscription_id: { get_secret: azure_subscription_id }
@@ -272,6 +282,29 @@ node_templates:
     relationships:
       - type: cloudify.relationships.contained_in
         target: webserver_vm
+      - type: cloudify.relationships.depends_on
+        target: check
+
+  ltm_config:
+    type: cloudify.terminal.raw
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        start:
+          inputs:
+            terminal_auth: *terminal_auth
+            calls:
+              - template: scripts/ltm_config.txt
+                params:
+                  APP_NODE_1_IP: { get_input: f5_wan_ip }
+                  # APP_NODE_1_PORT: { get_input: wan_port }
+                  DESTINATION_IP: { get_input: f5_public_ip }
+                  # DESTINATION_PORT: { get_input: lb_public_port }
+        stop:
+          inputs:
+            terminal_auth: *terminal_auth
+            calls:
+              - template: scripts/ltm_config_stop.txt
+    relationships:
       - type: cloudify.relationships.depends_on
         target: check
 
