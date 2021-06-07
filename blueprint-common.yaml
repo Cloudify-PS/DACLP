@@ -75,6 +75,16 @@ dsl_definitions:
     endpoint_verify: True
     endpoints_active_directory: https://login.microsoftonline.com
 
+  # terminal_auth: &terminal_auth
+  #   user: { get_secret: bigip_username }
+  #   password: { get_secret: bigip_password }
+  #   ip: { get_attribute: [mgmt_nic, ip] }
+  #   promt_check:
+  #     - '#'
+  #     - '$'
+  #   errors:
+  #     - "Command fail."
+
 node_types:
   cloudify.nodes.MonitoredServer:
     derived_from: cloudify.azure.nodes.compute.VirtualMachine
@@ -285,28 +295,28 @@ node_templates:
       - type: cloudify.relationships.depends_on
         target: check
 
-  ltm_config:
-    type: cloudify.terminal.raw
-    interfaces:
-      cloudify.interfaces.lifecycle:
-        start:
-          inputs:
-            terminal_auth: *terminal_auth
-            calls:
-              - template: scripts/ltm_config.txt
-                params:
-                  APP_NODE_1_IP: { get_input: f5_wan_ip }
-                  # APP_NODE_1_PORT: { get_input: wan_port }
-                  DESTINATION_IP: { get_input: f5_public_ip }
-                  # DESTINATION_PORT: { get_input: lb_public_port }
-        stop:
-          inputs:
-            terminal_auth: *terminal_auth
-            calls:
-              - template: scripts/ltm_config_stop.txt
-    relationships:
-      - type: cloudify.relationships.depends_on
-        target: check
+  # ltm_config:
+  #   type: cloudify.terminal.raw
+  #   interfaces:
+  #     cloudify.interfaces.lifecycle:
+  #       start:
+  #         inputs:
+  #           terminal_auth: *terminal_auth
+  #           calls:
+  #             - template: scripts/ltm_config.txt
+  #               params:
+  #                 APP_NODE_1_IP: { get_input: f5_wan_ip }
+  #                 # APP_NODE_1_PORT: { get_input: wan_port }
+  #                 DESTINATION_IP: { get_input: f5_public_ip }
+  #                 # DESTINATION_PORT: { get_input: lb_public_port }
+  #       stop:
+  #         inputs:
+  #           terminal_auth: *terminal_auth
+  #           calls:
+  #             - template: scripts/ltm_config_stop.txt
+  #   relationships:
+  #     - type: cloudify.relationships.depends_on
+  #       target: check
 
 groups:
   scalable_compute:
