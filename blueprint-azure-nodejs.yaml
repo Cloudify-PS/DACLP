@@ -37,6 +37,7 @@ node_templates:
                   extra_vars:
                     homeDir: { concat: ['/home/', { get_attribute: [TARGET, resource, os_profile, admin_username] }] }
                     message: { get_input: message }
+                    appDir: { get_secret: nodejs_app_dir }
 
   service_update:
     type: cloudify.nodes.Root
@@ -45,9 +46,9 @@ node_templates:
         update:
           implementation: scripts/do_update_nodejs.py
           inputs:
-            user: centos
+            user: { get_secret: nodejs_index_user }
             message: 'default message'
-            appDir: app
+            appDir: { get_secret: nodejs_app_dir }
     relationships:
       - type: cloudify.relationships.contained_in
         target: webserver_vm
