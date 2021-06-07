@@ -33,7 +33,7 @@
 - name: create index.html
   template:
     src: templates/index.j2
-    dest: {{homeDir}}/{{appDir}}/index.html
+    dest: "{{homeDir}}/{{appDir}}/index.html"
   vars:
     message: "{{message}}"
 

@@ -86,7 +86,7 @@ workflow params
 {
    "operation":"cloudify.interfaces.lifecycle.update",
    "operation_kwargs":{
-      "message": "Cloudify updated",
+      "message": "Cloudify updated"
    },
    "allow_kwargs_override":true,
    "run_by_dependency_order":false,
