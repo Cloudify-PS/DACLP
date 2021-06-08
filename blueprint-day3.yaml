@@ -99,12 +99,13 @@ node_templates:
       resource_config:
         blueprint:
           external_resource: false
-          id: f5-bigip-bp
+          id: { concat: [{get_input: deployment_version}, _f5-bigip-bp ] }
           blueprint_archive: https://github.com/Cloudify-PS/DACLP/archive/refs/heads/day3_dev.zip
           main_file_name: blueprint-f5-bigip.yaml
         deployment:
-          id: f5-bigip-deployment
-          auto_inc_suffix: false
+          # id: f5-bigip-deployment
+          # id: { concat: [{get_input: deployment_version}, f5-bigip-deployment] }
+          # auto_inc_suffix: false
           inputs:
             location: { get_input: location }
             resource_group: { get_input: resource_group }
@@ -142,6 +143,7 @@ node_templates:
             nagios_ssl_certificate: { get_attribute: [nagios_monitoring, capabilities, nagios_ssl_certificate] }
             nagios_user: { get_attribute: [nagios_monitoring, capabilities, nagios_user] }
             nagios_password: { get_attribute: [nagios_monitoring, capabilities, nagios_password] }
+            f5_mgmt_ip: { get_attribute: [f5_bigip, capabilities, mgmt_public_ip] }
             f5_wan_ip: { get_attribute: [f5_bigip, capabilities, wan_ip] }
             f5_public_ip: { get_attribute: [f5_bigip, capabilities, public_ip] }
     relationships:
@@ -156,12 +158,6 @@ outputs:
 
   location:
     value: { get_attribute: [azure_vm, capabilities, location] }
-
-  webserver_vm_public_ip:
-    value: { get_attribute: [azure_vm, capabilities, webserver_vm_public_ip] }
-
-  webserver_vm_private_ip:
-    value: { get_attribute: [azure_vm, capabilities, webserver_vm_private_ip] }
 
   nagios_private_address:
     value: { get_attribute: [nagios_monitoring, capabilities, nagios_address] }
@@ -178,14 +174,5 @@ outputs:
   nagios_password:
     value: { get_attribute: [nagios_monitoring, capabilities, nagios_password] }
 
-  f5_mgmt_public_ip:
-    value: { get_attribute: [f5_bigip, capabilities, mgmt_public_ip] }
-
-  f5_wan_ip:
-    value: { get_attribute: [f5_bigip, capabilities, wan_ip] }
-
-  f5_public_ip:
-    value: { get_attribute: [f5_bigip, capabilities, public_ip] }
-
-  f5_public_public_ip:
+  f5_load_balancer_ip:
     value: { get_attribute: [f5_bigip, capabilities, public_public_ip] }

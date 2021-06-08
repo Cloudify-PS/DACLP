@@ -177,8 +177,8 @@ node_templates:
       primary: true
     relationships:
       - type: cloudify.azure.relationships.nic_connected_to_ip_configuration
-        # target: mgmt_ip_configuration
-        target: wan_ip_configuration
+        target: mgmt_ip_configuration
+        # target: wan_ip_configuration
       - type: cloudify.azure.relationships.contained_in_resource_group
         target: resource_group
       - type: cloudify.azure.relationships.nic_connected_to_network_security_group
@@ -198,8 +198,8 @@ node_templates:
       - type: cloudify.azure.relationships.contained_in_resource_group
         target: resource_group
       - type: cloudify.azure.relationships.ip_configuration_connected_to_subnet
-        # target: mgmt_subnet
-        target: wan_subnet
+        target: mgmt_subnet
+        # target: wan_subnet
       - type: cloudify.azure.relationships.ip_configuration_connected_to_public_ip
         target: mgmt_ip_address
 

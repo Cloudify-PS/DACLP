@@ -54,6 +54,11 @@ inputs:
     description: >
       Nagios REST password
 
+  f5_mgmt_ip:
+    type: string
+    description: >
+      MGMT IP of the F5 Load Balancer
+
   f5_wan_ip:
     type: string
     description: >
@@ -75,15 +80,15 @@ dsl_definitions:
     endpoint_verify: True
     endpoints_active_directory: https://login.microsoftonline.com
 
-  # terminal_auth: &terminal_auth
-  #   user: { get_secret: bigip_username }
-  #   password: { get_secret: bigip_password }
-  #   ip: { get_attribute: [mgmt_nic, ip] }
-  #   promt_check:
-  #     - '#'
-  #     - '$'
-  #   errors:
-  #     - "Command fail."
+  terminal_auth: &terminal_auth
+    user: { get_secret: bigip_username }
+    password: { get_secret: bigip_password }
+    ip: { get_input: f5_mgmt_ip }
+    promt_check:
+      - '#'
+      - '$'
+    errors:
+      - "Command fail."
 
 node_types:
   cloudify.nodes.MonitoredServer:
@@ -295,28 +300,26 @@ node_templates:
       - type: cloudify.relationships.depends_on
         target: check
 
-  # ltm_config:
-  #   type: cloudify.terminal.raw
-  #   interfaces:
-  #     cloudify.interfaces.lifecycle:
-  #       start:
-  #         inputs:
-  #           terminal_auth: *terminal_auth
-  #           calls:
-  #             - template: scripts/ltm_config.txt
-  #               params:
-  #                 APP_NODE_1_IP: { get_input: f5_wan_ip }
-  #                 # APP_NODE_1_PORT: { get_input: wan_port }
-  #                 DESTINATION_IP: { get_input: f5_public_ip }
-  #                 # DESTINATION_PORT: { get_input: lb_public_port }
-  #       stop:
-  #         inputs:
-  #           terminal_auth: *terminal_auth
-  #           calls:
-  #             - template: scripts/ltm_config_stop.txt
-  #   relationships:
-  #     - type: cloudify.relationships.depends_on
-  #       target: check
+  ltm_config:
+    type: cloudify.terminal.raw
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        start:
+          inputs:
+            terminal_auth: *terminal_auth
+            calls:
+              - template: scripts/ltm_config.txt
+                params:
+                  APP_NODE_1_IP: { get_attribute: [ webserver_vm, ip ] }
+                  DESTINATION_IP: { get_input: f5_public_ip }
+        stop:
+          inputs:
+            terminal_auth: *terminal_auth
+            calls:
+              - template: scripts/ltm_config_stop.txt
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: check
 
 groups:
   scalable_compute:
@@ -331,6 +334,7 @@ groups:
       - run
       - check
       - snmp_conf
+      - ltm_config
       - service_update
 
 policies:
