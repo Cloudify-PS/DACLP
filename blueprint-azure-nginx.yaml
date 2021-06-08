@@ -35,7 +35,7 @@ node_templates:
                         ansible_ssh_common_args: -o StrictHostKeyChecking=no
                 options_config:
                   extra_vars:
-                    domain: cfy-hello
+                    domain: { get_secret: nginx_domain }
                     message: { get_input: message }
  
   service_update:
@@ -45,7 +45,7 @@ node_templates:
         update:
           implementation: scripts/do_update_nginx.py
           inputs:
-            domain: cfy-hello
+            domain: { get_secret: nginx_domain }
             message: default message
     relationships:
       - type: cloudify.relationships.contained_in

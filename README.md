@@ -62,9 +62,7 @@ workflow params
 {
    "operation":"cloudify.interfaces.lifecycle.update",
    "operation_kwargs":{
-      "domain": "cfy-hello",
       "message": "Cloudify updated"
- 
    },
    "allow_kwargs_override":true,
    "run_by_dependency_order":false,
@@ -88,9 +86,7 @@ workflow params
 {
    "operation":"cloudify.interfaces.lifecycle.update",
    "operation_kwargs":{
-      "user": "centos",
-      "message": "Cloudify updated",
-      "appDir": "app"
+      "message": "Cloudify updated"
    },
    "allow_kwargs_override":true,
    "run_by_dependency_order":false,
