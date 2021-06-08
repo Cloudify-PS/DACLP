@@ -304,13 +304,17 @@ node_templates:
     type: cloudify.terminal.raw
     interfaces:
       cloudify.interfaces.lifecycle:
+        create:
+          implementation: scripts/get_instance_id.py
+          executor: central_deployment_agent
         start:
           inputs:
             terminal_auth: *terminal_auth
             calls:
               - template: scripts/ltm_config.txt
                 params:
-                  APP_NODE_1_IP: { get_attribute: [ webserver_vm, ip ] }
+                  APP_NODE_NAME: { get_attribute: [SELF, instance_id] }
+                  APP_NODE_1_IP: { get_attribute: [webserver_vm, ip] }
                   DESTINATION_IP: { get_input: f5_public_ip }
         stop:
           inputs:
