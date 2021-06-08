@@ -120,7 +120,6 @@ node_templates:
     properties:
       azure_config: *client_config
       use_external_resource: false
-      name: { concat: [ { get_input: resource_prefix }, BIGIP, { get_input: resource_suffix } ] }
       location: { get_input: location }
       os_family: linux
       agent_config:
@@ -139,7 +138,6 @@ node_templates:
             sku: { get_input: virtual_machine_image_sku }
             version: latest
         osProfile:
-          computerName: { get_property: [SELF, name] }
           adminUsername: { get_secret: bigip_username }
           adminPassword: { get_secret: bigip_password }
     relationships:
@@ -158,7 +156,6 @@ node_templates:
     type: cloudify.azure.nodes.storage.StorageAccount
     properties:
       azure_config: *client_config
-      name: { concat: [ { get_input: resource_prefix }, BIGIP, "sa", { get_input: resource_suffix } ] }
       location: { get_input: location }
       resource_config:
         accountType: Standard_LRS
@@ -171,7 +168,6 @@ node_templates:
     properties:
       azure_config: *client_config
       use_external_resource: false
-      name: { concat: [ { get_input: resource_prefix }, 'bigip_mgmt_n', { get_input: resource_suffix } ] }
       location: { get_input: location }
       retry_after: { get_input: retry_after }
       primary: true
@@ -189,7 +185,6 @@ node_templates:
     properties:
       azure_config: *client_config
       use_external_resource: false
-      name: { concat: [ { get_input: resource_prefix }, 'bigip_mgmt_ic', { get_input: resource_suffix } ] }
       location: { get_input: location }
       retry_after: { get_input: retry_after }
       resource_config:
@@ -208,7 +203,6 @@ node_templates:
     properties:
       azure_config:  *client_config
       use_external_resource: false
-      name: { concat: [ { get_input: resource_prefix }, 'bigip_mgmt_ia', { get_input: resource_suffix } ] }
       location: { get_input: location }
       retry_after: { get_input: retry_after }
       resource_config:
@@ -222,7 +216,6 @@ node_templates:
     properties:
       azure_config: *client_config
       use_external_resource: false
-      name: { concat: [ { get_input: resource_prefix }, 'bigip_public_n', { get_input: resource_suffix } ] }
       location: { get_input: location }
       retry_after: { get_input: retry_after }
       primary: false
@@ -239,7 +232,6 @@ node_templates:
     properties:
       azure_config: *client_config
       use_external_resource: false
-      name: { concat: [ { get_input: resource_prefix }, 'bigip_public_ic', { get_input: resource_suffix } ] }
       location: { get_input: location }
       retry_after: { get_input: retry_after }
       resource_config:
@@ -257,7 +249,6 @@ node_templates:
     properties:
       azure_config:  *client_config
       use_external_resource: false
-      name: { concat: [ { get_input: resource_prefix }, 'bigip_public_ia', { get_input: resource_suffix } ] }
       location: { get_input: location }
       retry_after: { get_input: retry_after }
       resource_config:
@@ -271,7 +262,6 @@ node_templates:
     properties:
       azure_config: *client_config
       use_external_resource: false
-      name: { concat: [ { get_input: resource_prefix }, 'bigip_wan_n', { get_input: resource_suffix } ] }
       location: { get_input: location }
       retry_after: { get_input: retry_after }
       primary: false
@@ -288,7 +278,6 @@ node_templates:
     properties:
       azure_config: *client_config
       use_external_resource: false
-      name: { concat: [ { get_input: resource_prefix }, 'bigip_wan_ic', { get_input: resource_suffix } ] }
       location: { get_input: location }
       retry_after: { get_input: retry_after }
       resource_config:
@@ -363,20 +352,7 @@ node_templates:
     type: cloudify.azure.nodes.network.NetworkSecurityGroup
     properties:
       azure_config: *client_config
-      use_external_resource: true
-      name: f5_sg
-      location: { get_input: location }
-      retry_after: { get_input: retry_after }
-    relationships:
-    - type: cloudify.azure.relationships.contained_in_resource_group
-      target: resource_group
-
-  network_security_group:
-    type: cloudify.azure.nodes.network.NetworkSecurityGroup
-    properties:
-      azure_config: *client_config
       use_external_resource: false
-      name: f5_sg
       location: { get_input: location }
       retry_after: { get_input: retry_after }
       resource_config:

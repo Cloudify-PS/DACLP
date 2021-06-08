@@ -98,10 +98,8 @@ node_templates:
         tenant: { get_input: target_resource_tenant }
       resource_config:
         blueprint:
-          external_resource: false
-          id: { concat: [{get_input: deployment_version}, _f5-bigip-bp ] }
-          blueprint_archive: https://github.com/Cloudify-PS/DACLP/archive/refs/heads/day3_dev.zip
-          main_file_name: blueprint-f5-bigip.yaml
+          external_resource: true
+          id: { concat: [{get_input: deployment_version}, _bigip] }
         deployment:
           # id: f5-bigip-deployment
           # id: { concat: [{get_input: deployment_version}, f5-bigip-deployment] }
