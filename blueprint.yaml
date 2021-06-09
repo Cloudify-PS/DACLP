@@ -68,7 +68,6 @@ inputs:
 node_templates:
   nagios_monitoring:
     type: cloudify.nodes.ServiceComponent
-#    type: cloudify.nodes.SharedResource
     properties:
       client:
         host: 127.0.0.1
@@ -76,12 +75,12 @@ node_templates:
         password: { get_secret: cloudify_manager_user_password }
         tenant: { get_input: target_resource_tenant }
       resource_config:
-#        deployment:
-#          id: nagios_monitoring_xn7skz
         blueprint:
           external_resource: true
-          id: { concat: [{get_input: deployment_version}, _nagios] }
+          id: nagios-bp
         deployment:
+          id: nagios-deployment
+          auto_inc_suffix: true
           inputs:
             cpu_idle_threshold: { get_input: cpu_idle_threshold }
             location: { get_input: location }
@@ -99,11 +98,10 @@ node_templates:
       resource_config:
         blueprint:
           external_resource: true
-          id: { concat: [{get_input: deployment_version}, _bigip] }
+          id: f5-bigip-bp
         deployment:
-          # id: f5-bigip-deployment
-          # id: { concat: [{get_input: deployment_version}, f5-bigip-deployment] }
-          # auto_inc_suffix: false
+          id: f5-bigip-deployment
+          auto_inc_suffix: true
           inputs:
             location: { get_input: location }
             resource_group: { get_input: resource_group }
@@ -127,8 +125,10 @@ node_templates:
       resource_config:
         blueprint:
           external_resource: true
-          id: { concat: [{get_input: deployment_version}, _, { get_input: app_server_type }] }
+          id: { concat: ['azure-vm-', { get_input: app_server_type }, '-bp'] }
         deployment:
+          id: { concat: ['azure-vm-', { get_input: app_server_type }, '-deployment'] }
+          auto_inc_suffix: true
           inputs:
             location: { get_input: location }
             resource_group: { get_input: resource_group }
@@ -163,9 +163,6 @@ outputs:
   nagios_public_address:
     value: { get_attribute: [nagios_monitoring, capabilities, nagios_public_address] }
 
-  nagios_web_ui_endpoint:
-    value: { get_attribute: [nagios_monitoring, capabilities, nagios_web_ui_endpoint] }
-
   nagios_ssl_certificate:
     value: { get_attribute: [nagios_monitoring, capabilities, nagios_ssl_certificate] }
 
@@ -174,6 +171,9 @@ outputs:
 
   nagios_password:
     value: { get_attribute: [nagios_monitoring, capabilities, nagios_password] }
+
+  nagios_web_ui_endpoint:
+    value: { get_attribute: [nagios_monitoring, capabilities, nagios_web_ui_endpoint] }
 
   f5_load_balancer_ip:
     value: { get_attribute: [f5_bigip, capabilities, public_public_ip] }
