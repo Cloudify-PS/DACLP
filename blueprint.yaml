@@ -5,9 +5,6 @@ imports:
   - https://cloudify.co/spec/cloudify/5.1.0/types.yaml
 
 inputs:
-  deployment_version:
-    type: string
-
   app_server_type:
     description: >
       Choose the server type that the application will be hosted on.
