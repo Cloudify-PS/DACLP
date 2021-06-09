@@ -50,6 +50,10 @@ inputs:
     description: Suffix of every resource created at this deployment on Azure.
     default: ""
 
+  bigip_license:
+    description: License for BIGIP
+    type: string
+
 dsl_definitions:
   client_config: &client_config
     subscription_id: { get_secret: azure_subscription_id }
@@ -78,7 +82,7 @@ node_templates:
             calls:
               - template: scripts/install_f5_license.txt
                 params:
-                  REG_KEY: { get_secret: bigip_license }
+                  REG_KEY: { get_input: bigip_license }
         delete:
           inputs:
             terminal_auth: *terminal_auth

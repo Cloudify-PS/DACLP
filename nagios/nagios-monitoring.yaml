@@ -25,18 +25,6 @@ dsl_definitions:
         - cloudify.interfaces.daclp.start: {}
         - cloudify.interfaces.daclp.check_started: {}
         - cloudify.interfaces.monitoring.start: {}
-#    workflow_id: execute_operation
-#    parameters:
-#      operation: cloudify.interfaces.lifecycle.create
-#      operation_kwargs:
-#        args:
-#          hardwareProfile:
-#            vmSize: Standard_A2_v2
-#      run_by_dependency_order: false
-#      type_names: []
-#      node_ids:
-#        - webserver_vm
-#      node_instance_ids: []
 
   app_cause_snmp_storage: &app_cause_snmp_storage
     workflow_id: call_lifecycle_operations
@@ -52,22 +40,6 @@ dsl_definitions:
         - cloudify.interfaces.daclp.start: {}
         - cloudify.interfaces.daclp.check_started: {}
         - cloudify.interfaces.monitoring.start: {}
-#    workflow_id: execute_operation
-#    parameters:
-#      operation: cloudify.interfaces.lifecycle.create
-#      operation_kwargs:
-#        args:
-#          hardwareProfile:
-#            vmSize: Standard_A1_v2
-#          storageProfile:
-#            os_disk:
-#              diskSizeGB: 70
-#      allow_kwargs_override: true
-#      run_by_dependency_order: false
-#      type_names: []
-#      node_ids:
-#        - webserver_vm
-#      node_instance_ids: []
 
   v3_snmp: &v3_snmp
     username: { get_secret: snmp_user }
@@ -92,11 +64,23 @@ node_templates:
       - type: cloudify.nagios.target_type_checks
         target: reachability_check
       - type: cloudify.nagios.target_type_checks
-        target: cpu_load_check
-      - type: cloudify.nagios.target_type_checks
         target: storage_check
       - type: cloudify.nagios.target_type_checks
         target: ram_check
+
+  app_vm_scale_target_type:
+    type: cloudify.nagios.nodes.TargetType
+    properties:
+      name: app_vm_scale_target_type
+      check_interval: 0.25
+      max_check_retries: 3
+      snmp_properties:
+        v3: *v3_snmp
+    relationships:
+      - type: cloudify.nagios.configuration_for_nagios_server
+        target: nagios
+      - type: cloudify.nagios.target_type_checks
+        target: cpu_load_check
 
 
   reachability_check:

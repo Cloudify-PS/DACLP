@@ -69,6 +69,10 @@ inputs:
     description: >
       Public IP of the F5 Load Balancer
 
+  main_deployment_id:
+    type: string
+
+
 dsl_definitions:
   client_config: &client_config
     subscription_id: { get_secret: azure_subscription_id }
@@ -93,13 +97,19 @@ dsl_definitions:
 node_types:
   cloudify.nodes.MonitoredServer:
     derived_from: cloudify.azure.nodes.compute.VirtualMachine
-    properties:
+    properties: &nagiosrest_monitoring_properties_def
       nagiosrest_monitoring:
         type: cloudify.datatypes.nagiosrest.Properties
-    interfaces:
+    interfaces: &nagiosrest_monitoring_interfaces_def
       cloudify.interfaces.monitoring:
         start: nagiosrest.nagiosrest_plugin.tasks.add_monitoring
         stop: nagiosrest.nagiosrest_plugin.tasks.remove_monitoring
+
+  cloudify.nodes.MonitoredResource:
+    derived_from: cloudify.nodes.Root
+    properties: *nagiosrest_monitoring_properties_def
+    interfaces: *nagiosrest_monitoring_interfaces_def
+
 
 node_templates:
   resource_group:
@@ -175,7 +185,7 @@ node_templates:
         install_method: remote
         user: { get_input: webserver_vm_os_username }
         key: { get_attribute: [agent_key, private_key_export] }
-      nagiosrest_monitoring:
+      nagiosrest_monitoring: &nagiosrest_monitoring
         instance_ip_property: ip
         address: { get_input: nagios_address }
         certificate: { get_input: nagios_ssl_certificate }
@@ -227,6 +237,26 @@ node_templates:
         target: nic
       - type: cloudify.azure.relationships.connected_to_storage_account
         target: storage_account
+
+  scale_monitoring:
+    type: cloudify.nodes.MonitoredResource 
+    properties:
+      nagiosrest_monitoring: 
+        <<: *nagiosrest_monitoring
+        target_type: app_vm_scale_target_type
+        deployment_override: { get_input: main_deployment_id }
+    relationships:
+      - type: cloudify.relationships.contained_in
+        target: webserver_vm
+        source_interfaces:
+          cloudify.interfaces.lifecycle:
+            establish:
+              implementation: scripts/set_runtime_properties.py
+              executor: central_deployment_agent
+              inputs:
+                runtime_properties:
+                  - name: ip
+                    value: { get_attribute: [TARGET, ip] }
 
   storage_account:
     type: cloudify.azure.nodes.storage.StorageAccount
