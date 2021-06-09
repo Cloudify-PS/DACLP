@@ -387,16 +387,23 @@ capabilities:
   mgmt_public_ip:
     description: Public IP of management interface
     value: { get_attribute: [mgmt_nic, public_ip] }
+
   wan_ip:
     description: Private IP of WAN interface
     value: { get_attribute: [wan_nic, ip] }
+
   public_ip:
     description: Private IP of Public interface
     value: { get_attribute: [public_nic, ip] }
+
   public_public_ip:
     description: Public IP of Public interface
     value: { get_attribute: [public_nic, public_ip] }
+
   f5_web_ui_endpoint:
     description: Address of the F5 BIGIP web interface
-    value: { get_attribute: [public_nic, public_ip] }
     value: { concat: [ 'https://', { get_attribute: [mgmt_nic, public_ip] }] }
+
+  f5_load_balancer_endpoint:
+    description: Endpoint URL of the F5 Load Balancer
+    value: { concat: [ 'http://', { get_attribute: [public_nic, public_ip] }] }

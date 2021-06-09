@@ -175,5 +175,8 @@ outputs:
   f5_load_balancer_ip:
     value: { get_attribute: [f5_bigip, capabilities, public_public_ip] }
 
+  f5_load_balancer_endpoint:
+    value: { get_attribute: [f5_bigip, capabilities, f5_load_balancer_endpoint] }
+
   f5_web_ui_endpoint:
     value: { get_attribute: [f5_bigip, capabilities, f5_web_ui_endpoint] }
