@@ -209,6 +209,10 @@ capabilities:
     description: Internal Nagios address
     value: { get_attribute: [nagios_nic, ip] }
 
+  nagios_web_ui_endpoint:
+    description: Address of the Nagios web interface
+    value: { concat: [ 'https://', { get_attribute: [nagios_vm, public_ip] }, '/nagios' ] }
+
   nagios_public_address:
     description: Public Nagios address
     value: { get_attribute: [nagios_vm, public_ip] }

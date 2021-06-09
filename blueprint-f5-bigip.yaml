@@ -396,3 +396,7 @@ capabilities:
   public_public_ip:
     description: Public IP of Public interface
     value: { get_attribute: [public_nic, public_ip] }
+  f5_web_ui_endpoint:
+    description: Address of the F5 BIGIP web interface
+    value: { get_attribute: [public_nic, public_ip] }
+    value: { concat: [ 'https://', { get_attribute: [mgmt_nic, public_ip] }] }

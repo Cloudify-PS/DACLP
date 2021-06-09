@@ -163,6 +163,9 @@ outputs:
   nagios_public_address:
     value: { get_attribute: [nagios_monitoring, capabilities, nagios_public_address] }
 
+  nagios_web_ui_endpoint:
+    value: { get_attribute: [nagios_monitoring, capabilities, nagios_web_ui_endpoint] }
+
   nagios_ssl_certificate:
     value: { get_attribute: [nagios_monitoring, capabilities, nagios_ssl_certificate] }
 
@@ -174,3 +177,6 @@ outputs:
 
   f5_load_balancer_ip:
     value: { get_attribute: [f5_bigip, capabilities, public_public_ip] }
+
+  f5_web_ui_endpoint:
+    value: { get_attribute: [f5_bigip, capabilities, f5_web_ui_endpoint] }
