@@ -233,6 +233,28 @@ node_templates:
         target: nic
       - type: cloudify.azure.relationships.connected_to_storage_account
         target: storage_account
+      - type: cloudify.relationships.connected_to
+        target: ips_list
+        source_interfaces:
+          cloudify.interfaces.relationship_lifecycle:
+            establish:
+              implementation: scripts/runtime_properties_append_ip.py
+              executor: central_deployment_agent
+              inputs:
+                runtime_properties:
+                  - name: public_ips
+                    value: { get_attribute: [ SOURCE, public_ip ] }
+                  - name: private_ips
+                    value: { get_attribute: [ SOURCE, ip ] }
+            unlink:
+              implementation: scripts/runtime_properties_remove_ip.py
+              executor: central_deployment_agent
+              inputs:
+                runtime_properties:
+                  - name: public_ips
+                    value: { get_attribute: [ SOURCE, public_ip ] }
+                  - name: private_ips
+                    value: { get_attribute: [ SOURCE, ip ] }
 
   storage_account:
     type: cloudify.azure.nodes.storage.StorageAccount
@@ -279,6 +301,9 @@ node_templates:
     relationships:
       - type: cloudify.azure.relationships.contained_in_resource_group
         target: resource_group
+
+  ips_list:
+    type: cloudify.nodes.Root
 
   upgrade_vm:
     type: cloudify.nodes.Root
@@ -365,7 +390,7 @@ capabilities:
     value: { get_input: location }
 
   webserver_vm_public_ip:
-    value: { get_attribute: [ webserver_vm, public_ip ] }
+    value: { get_attribute: [ ips_list, public_ips ] }
 
   webserver_vm_private_ip:
-    value: { get_attribute: [ webserver_vm, ip ] }
+    value: { get_attribute: [ ips_list, private_ips ] }
