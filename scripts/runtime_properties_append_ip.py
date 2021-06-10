@@ -10,10 +10,6 @@ try:
         ctx.target.instance.runtime_properties[n] = \
             ctx.target.instance.runtime_properties.setdefault(n, [])[:]
         ctx.target.instance.runtime_properties[n].append(v)
-        ctx.logger.info('source: {}'
-                        .format(ctx.source.instance.runtime_properties))
-        ctx.logger.info('target: {}'
-                        .format(ctx.target.instance.runtime_properties))
 except KeyError:
     raise NonRecoverableError('Runtime properties to fetch must be a '\
         'list of dictionaries with name and value pairs: {}'.format(runtime_properties))
