@@ -23,7 +23,7 @@ inputs:
 
   free_ram_threshold:
     type: integer
-    default: 1048576
+    default: 548576
 
   cpu_idle_threshold:
     type: integer
