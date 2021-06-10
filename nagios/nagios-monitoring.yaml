@@ -25,18 +25,6 @@ dsl_definitions:
         - cloudify.interfaces.daclp.start: {}
         - cloudify.interfaces.daclp.check_started: {}
         - cloudify.interfaces.monitoring.start: {}
-#    workflow_id: execute_operation
-#    parameters:
-#      operation: cloudify.interfaces.lifecycle.create
-#      operation_kwargs:
-#        args:
-#          hardwareProfile:
-#            vmSize: Standard_A2_v2
-#      run_by_dependency_order: false
-#      type_names: []
-#      node_ids:
-#        - webserver_vm
-#      node_instance_ids: []
 
   app_cause_snmp_storage: &app_cause_snmp_storage
     workflow_id: call_lifecycle_operations
@@ -52,22 +40,6 @@ dsl_definitions:
         - cloudify.interfaces.daclp.start: {}
         - cloudify.interfaces.daclp.check_started: {}
         - cloudify.interfaces.monitoring.start: {}
-#    workflow_id: execute_operation
-#    parameters:
-#      operation: cloudify.interfaces.lifecycle.create
-#      operation_kwargs:
-#        args:
-#          hardwareProfile:
-#            vmSize: Standard_A1_v2
-#          storageProfile:
-#            os_disk:
-#              diskSizeGB: 70
-#      allow_kwargs_override: true
-#      run_by_dependency_order: false
-#      type_names: []
-#      node_ids:
-#        - webserver_vm
-#      node_instance_ids: []
 
   v3_snmp: &v3_snmp
     username: { get_secret: snmp_user }
