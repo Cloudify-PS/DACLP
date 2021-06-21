@@ -93,7 +93,7 @@ node_templates:
   storage_check:
     type: cloudify.nagios.nodes.SNMPValueCheck
     properties:
-      check_description: Get disk usagge percentage
+      check_description: Get disk usage percentage
       snmp_oid: UCD-SNMP-MIB::dskPercent.1
       high_critical_threshold: { get_input: used_storage_percentage_threshold }
       action_on_high_threshold: *app_cause_snmp_storage
