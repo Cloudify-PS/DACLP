@@ -82,6 +82,10 @@ In order to do that, there should be another VM manually created with Jenkins in
 
 ![Alt text](img/dhl-poc-jenkins-diagram.png?raw=true "DACLP with Jenkins diagram")
 
+### Saved files
+- [Cloudify Manager snapshot](https://drive.google.com/file/d/1ZWjTk3yEdJ3WzrJnVKSKODoQnCar0fE_/view?usp=sharing)
+- [Jenkins machine files](https://drive.google.com/file/d/1lwzXSm6nNDAUWnAerK7YWrEghKwdRC2o/view?usp=sharing)
+
 ## Workflow closed-loop triggering
 All workflows will be trigerred by Nagios. It performes checks periodically and in case some threshold is exceeded, Nagios triggers relevant workflow on the deployment. The commands need to be executed on the monitored VM.
 
